@@ -1,0 +1,52 @@
+package com.sample
+
+import classes.InputParameters;
+
+/*rule "Geometrical Rule"
+	when
+		InputParameters( $params : parameters,
+						 parameters["Dbore"] != null,
+						 parameters["MinGap"] != null,
+						 parameters["Lclamp"] != null,
+						 parameters["MinOverlap"] != null,
+						 parameters["MaxOverlap"] != null,
+						 parameters["WasherMinGap"] != null,
+						 parameters["WasherMinOverlap"] != null)
+		$washer : Washer( $innerD : innerDiameter,
+						  $outerD : outerDiameter,
+						  $thickness : thickness)
+		$screwNut : ScrewNut ( $nominalD : nominalDiameter,
+							   $nutThread : thread,
+							   $height : height,
+							   (Integer)$params["Dbore"] >= $nominalD + (Integer)$params["MinGap"])
+		$screw : Screw( 
+						$nutThread == thread,
+						$nominalD == nominalDiameter,
+						length >= (Integer)$params["Lclamp"] + $height + $thickness + $thickness + (Integer)$params["MinOverlap"],
+						length <= (Integer)$params["Lclamp"] + $height + $thickness + $thickness + (Integer)$params["MaxOverlap"],
+						$innerD >= nominalDiameter + (Integer)$params["WasherMinGap"],
+						$innerD < headDiameter,
+						$outerD >= headDiameter + (Integer)$params["WasherMinOverlap"]
+						)
+	then
+		System.out.println( "Screw: " + $screw.getName() + ", ScrewNut: " + $screwNut.getName() + ", Washer: " + $washer.getName());
+end*/
+
+rule "Geometrical Rule"
+	when
+		InputParameters( $params : parameters,
+						 parameters["Dbore"] != null,
+						 parameters["MinGap"] != null,
+						 parameters["Lclamp"] != null,
+						 parameters["MinOverlap"] != null,
+						 parameters["MaxOverlap"] != null,
+						 parameters["WasherMinGap"] != null,
+						 parameters["WasherMinOverlap"] != null)
+		$washer : Object()
+		$screwNut : Object()
+		$screw : Object($class : class)
+		
+	then
+		//$screw.getClass().getMethod("getName").invoke($screw)
+		System.out.println( "Screw: "  + $screw.getClass().getMethod("getName").invoke($screw));
+end
