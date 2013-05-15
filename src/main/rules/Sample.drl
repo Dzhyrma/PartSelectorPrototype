@@ -1,6 +1,10 @@
 package com.sample
 
 import classes.InputParameters;
+import classes.Part;
+import com.models.HashVector;
+import com.helpers.RuleResult;
+import com.helpers.AuxiliaryMethods;
 
 /*rule "Geometrical Rule"
 	when
@@ -18,19 +22,23 @@ import classes.InputParameters;
 		$screwNut : ScrewNut ( $nominalD : nominalDiameter,
 							   $nutThread : thread,
 							   $height : height,
-							   (Integer)$params["Dbore"] >= $nominalD + (Integer)$params["MinGap"])
+							   (Number)$params["Dbore"] >= $nominalD + (Number)$params["MinGap"])
 		$screw : Screw( 
 						$nutThread == thread,
 						$nominalD == nominalDiameter,
-						length >= (Integer)$params["Lclamp"] + $height + $thickness + $thickness + (Integer)$params["MinOverlap"],
-						length <= (Integer)$params["Lclamp"] + $height + $thickness + $thickness + (Integer)$params["MaxOverlap"],
-						$innerD >= nominalDiameter + (Integer)$params["WasherMinGap"],
+						length >= (Number)$params["Lclamp"] + $height + $thickness + $thickness + (Number)$params["MinOverlap"],
+						length <= (Number)$params["Lclamp"] + $height + $thickness + $thickness + (Number)$params["MaxOverlap"],
+						$innerD >= nominalDiameter + (Number)$params["WasherMinGap"],
 						$innerD < headDiameter,
-						$outerD >= headDiameter + (Integer)$params["WasherMinOverlap"]
+						$outerD >= headDiameter + (Number)$params["WasherMinOverlap"]
 						)
 	then
 		System.out.println( "Screw: " + $screw.getName() + ", ScrewNut: " + $screwNut.getName() + ", Washer: " + $washer.getName());
 end*/
+/*function Number AuxiliaryMethods.getField(String name, Object object) {
+	//System.out.println(name + " " + object.getClass().getName());
+	return (Number)object.getClass().getMethod(name).invoke(object);
+}*/
 
 rule "Geometrical Rule"
 	when
@@ -41,12 +49,29 @@ rule "Geometrical Rule"
 						 parameters["MinOverlap"] != null,
 						 parameters["MaxOverlap"] != null,
 						 parameters["WasherMinGap"] != null,
-						 parameters["WasherMinOverlap"] != null)
-		$washer : Object()
-		$screwNut : Object()
-		$screw : Object($class : class)
-		
+						 parameters["WasherMinOverlap"] != null,
+						 parameters["Screw"] != null,
+						 parameters["ScrewNut"] != null,
+						 parameters["Washer"] != null)
+		$washer : Part(
+						 ((Class)$params["Washer"]).isAssignableFrom(class))
+		$screwNut : Part(
+						   ((Class)$params["ScrewNut"]).isAssignableFrom(class),
+						   (Number)$params["Dbore"] >= AuxiliaryMethods.getField("getNominalDiameter", $screwNut) + (Number)$params["MinGap"])
+		$screw : Part(
+						((Class)$params["Screw"]).isAssignableFrom(class),
+						AuxiliaryMethods.getField("getThread", $screwNut) == AuxiliaryMethods.getField("getThread", $screw),
+						AuxiliaryMethods.getField("getNominalDiameter", $screwNut) == AuxiliaryMethods.getField("getNominalDiameter", $screw),
+						AuxiliaryMethods.getField("getLength", $screw) >= (Number)$params["Lclamp"] + AuxiliaryMethods.getField("getHeight", $screwNut) + 2 * AuxiliaryMethods.getField("getThickness", $washer) + (Number)$params["MinOverlap"],
+						AuxiliaryMethods.getField("getLength", $screw) <= (Number)$params["Lclamp"] + AuxiliaryMethods.getField("getHeight", $screwNut) + 2 * AuxiliaryMethods.getField("getThickness", $washer) + (Number)$params["MaxOverlap"],
+						AuxiliaryMethods.getField("getInnerDiameter", $washer) >= AuxiliaryMethods.getField("getNominalDiameter", $screwNut) + (Number)$params["WasherMinGap"],
+						AuxiliaryMethods.getField("getInnerDiameter", $washer) < AuxiliaryMethods.getField("getHeadDiameter", $screw),
+						AuxiliaryMethods.getField("getOuterDiameter", $washer) >= AuxiliaryMethods.getField("getHeadDiameter", $screw) + (Number)$params["WasherMinOverlap"])
 	then
-		//$screw.getClass().getMethod("getName").invoke($screw)
-		System.out.println( "Screw: "  + $screw.getClass().getMethod("getName").invoke($screw));
+		HashVector result = new HashVector();
+		result.addPart($screw);
+		result.addPart($screwNut);
+		result.addPart($washer);
+		RuleResult.getInstance().addResult(result);
+		System.out.println( "Screw: " + $screw.getName() + ", ScrewNut: " + $screwNut.getName() + ", Washer: " + $washer.getName());
 end

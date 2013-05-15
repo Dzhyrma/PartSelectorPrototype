@@ -1,22 +1,16 @@
 package classes;
 
-public class ScrewNut {
+public class ScrewNut extends Part {
 	private int height;
-	private String name;
 	private int nominalDiameter;
 	private int thread;
 
 	public ScrewNut(String name) {
-		super();
-		this.name = name;
+		super(name);
 	}
 
 	public final int getHeight() {
 		return this.height;
-	}
-
-	public final String getName() {
-		return this.name;
 	}
 
 	public final int getNominalDiameter() {

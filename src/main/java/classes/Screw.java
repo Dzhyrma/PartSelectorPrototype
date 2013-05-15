@@ -1,14 +1,13 @@
 package classes;
 
-public class Screw {
+public class Screw extends Part {
 	private int headDiameter;
 	private int length;
-	private String name;
 	private int nominalDiameter;
 	private int thread;
 
 	public Screw(String name) {
-		this.name = name;
+		super(name);
 	}
 
 	public final int getHeadDiameter() {
@@ -17,10 +16,6 @@ public class Screw {
 
 	public final int getLength() {
 		return this.length;
-	}
-
-	public final String getName() {
-		return this.name;
 	}
 
 	public final int getNominalDiameter() {
@@ -46,4 +41,5 @@ public class Screw {
 	public final void setThread(int thread) {
 		this.thread = thread;
 	}
+
 }

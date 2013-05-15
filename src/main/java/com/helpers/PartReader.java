@@ -32,21 +32,21 @@ public class PartReader {
 		return value;
 	}
 
-	public boolean convertToObjects(Class<?> partClass, Map<String, String> attributeMap) {
+	public boolean convertToObjects(Class<?> clazz, Map<String, String> attributeMap) {
 		if (this.instances == null || this.names == null || this.indexMap == null)
 			return false;
 		this.parts = new Object[this.instances.size()];
 		for (int i = 0; i < this.parts.length; i++) {
 			Object newPart;
 			try {
-				newPart = partClass.newInstance();
+				newPart = clazz.newInstance();
 			} catch (InstantiationException | IllegalAccessException e) {
 				System.err.println("Object was not initialized");
 				continue;
 			}
 			for (String key : attributeMap.keySet()) {
 				try {
-					Field field = partClass.getField(key);
+					Field field = clazz.getField(key);
 					field.set(newPart, toObject(field.getType(), this.instances.get(i)[indexMap.get(attributeMap.get(key).toLowerCase())]));
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
 					System.out.println("Field " + key + " was not found");
@@ -57,12 +57,14 @@ public class PartReader {
 		return true;
 	}
 
+	@SuppressWarnings("resource")
 	public boolean loadInstances(String fileName) {
 		if (fileName == null)
 			return false;
 		File file = new File(fileName);
+		if (!file.exists())
+			return false;
 		try {
-			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(file);
 			boolean namesInit = false;
 			while (scanner.hasNext()) {

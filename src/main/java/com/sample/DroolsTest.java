@@ -3,9 +3,13 @@ package com.sample;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
@@ -34,7 +38,14 @@ import org.drools.runtime.StatefulKnowledgeSession;
 import com.helpers.ClassCompiler;
 import com.helpers.ClassGenerator;
 import com.helpers.ClassReader;
+import com.helpers.KnowledgeBaseExtractor;
 import com.helpers.PartReader;
+import com.helpers.RankComparator;
+import com.helpers.RuleResult;
+import com.models.Assembly;
+import com.models.AssemblyNode;
+import com.models.HashVector;
+import com.models.Reference;
 
 import classes.EyeScrew;
 import classes.InputParameters;
@@ -83,17 +94,29 @@ public class DroolsTest {
 			//KnowledgeRuntimeLogger logger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "test");
 			// go !
 			for (int j = 100; j <= 100; j++) {
+				Assembly someAssembly = null;
 				NUMBER_OF_INSTANCES = j;
 				long startTime = System.currentTimeMillis();
 				for (int i = 0; i < 1; i++) {
 					ksession = kbase.newStatefulKnowledgeSession();
-					initFacts(ksession);
+					someAssembly = initFacts(ksession);
+					RuleResult.getInstance().clearResults();
 					ksession.fireAllRules();
 					ksession.dispose();
 				}
 				long stopTime = System.currentTimeMillis();
 				long elapsedTime = stopTime - startTime;
 				System.out.println(elapsedTime);
+				System.out.println(RuleResult.getInstance().getResults());
+				Collection<HashVector> result = RuleResult.getInstance().getResults();
+				KnowledgeBaseExtractor kbe = new KnowledgeBaseExtractor();
+				kbe.setAssembly(someAssembly);
+				RankComparator rc = new RankComparator(kbe.extractKnowledge());
+				Collections.sort((List<HashVector>) result, rc);
+				for (HashVector hashVector : result) {
+	                
+                }
+				System.out.println(result);
 			}
 			//logger.close();
 		} catch (Throwable t) {
@@ -101,7 +124,11 @@ public class DroolsTest {
 		}
 	}
 
-	private static void initFacts(StatefulKnowledgeSession ksession) {
+	private static void initFacts() {
+
+	}
+
+	private static Assembly initFacts(StatefulKnowledgeSession ksession) {
 		inputParameters = new InputParameters();
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("Dbore", 17);
@@ -111,10 +138,16 @@ public class DroolsTest {
 		parameters.put("MaxOverlap", 10);
 		parameters.put("WasherMinGap", 1);
 		parameters.put("WasherMinOverlap", 0);
+		parameters.put("Screw", Screw.class);
+		parameters.put("ScrewNut", ScrewNut.class);
+		parameters.put("Washer", Washer.class);
 		inputParameters.setParameters(parameters);
 
 		ksession.insert(inputParameters);
 
+		EyeScrew screw1 = null;
+		ScrewNut screwNut1 = null;
+		Washer washer1 = null;
 		for (int dn = 14; dn <= 18; dn += 2)
 			for (int l = 50; l < 60; l += 5)
 				for (int thread = 11; thread <= 15; thread += 2) {
@@ -123,7 +156,9 @@ public class DroolsTest {
 					screw.setLength(l);
 					screw.setNominalDiameter(dn);
 					screw.setThread(thread);
-					ksession.insert((Object)screw);
+					ksession.insert((Object) screw);
+					if (screw.getName().compareTo("Schraube_M11_14x50_DIN_933") == 0)
+						screw1 = screw;
 				}
 
 		int rand = new Random().nextInt(NUMBER_OF_INSTANCES - 50);
@@ -134,7 +169,9 @@ public class DroolsTest {
 				screwNut.setNominalDiameter(dn);
 				screwNut.setHeight(dn - 3);
 				screwNut.setThread(thread);
-				ksession.insert((Object)screwNut);
+				ksession.insert((Object) screwNut);
+				if (screwNut.getName().compareTo("Mutter_M11_14_DIN_934") == 0)
+					screwNut1 = screwNut;
 			}
 
 		for (int i = 0; i <= NUMBER_OF_INSTANCES - 50 - rand; i += 2) {
@@ -142,8 +179,28 @@ public class DroolsTest {
 			washer.setInnerDiameter(15 + i);
 			washer.setOuterDiameter(28 + ((i == 4) ? (i + 2) : i));
 			washer.setThickness(3);
-			ksession.insert((Object)washer);
+			ksession.insert((Object) washer);
+			if (washer.getName().compareTo("Scheibe_B_15_DIN_125") == 0)
+				washer1 = washer;
 		}
+		
+		Assembly assembly = new Assembly("main assemby");
+		Assembly bg1 = new Assembly("BG1");
+		AssemblyNode screwNode = new AssemblyNode();
+		AssemblyNode screwNutNode = new AssemblyNode();
+		AssemblyNode washerNode = new AssemblyNode();
+		screwNode.setPart(screw1);
+		screwNode.setRef(new Reference(0, 0, 0));
+		screwNutNode.setPart(screwNut1);
+		screwNutNode.setRef(new Reference(0, 0, 5));
+		washerNode.setPart(washer1);
+		washerNode.setRef(new Reference(0, 0, 4));
+		bg1.addNode(screwNode);
+		bg1.addNode(screwNutNode);
+		bg1.addNode(washerNode);
+		assembly.addAssembly(bg1);
+		
+		return assembly;
 	}
 
 	private static KnowledgeBase readKnowledgeBase() throws Exception {
@@ -162,3 +219,5 @@ public class DroolsTest {
 	}
 
 }
+
+

@@ -1,21 +1,16 @@
 package classes;
 
-public class Washer {
+public class Washer extends Part {
 	private int innerDiameter;
-	private String name;
-
 	private int outerDiameter;
-
 	private int thickness;
+
 	public Washer(String name) {
-		this.name = name;
+		super(name);
 	}
+
 	public final int getInnerDiameter() {
 		return this.innerDiameter;
-	}
-
-	public final String getName() {
-		return this.name;
 	}
 
 	public final int getOuterDiameter() {
