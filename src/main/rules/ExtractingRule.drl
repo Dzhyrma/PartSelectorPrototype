@@ -7,6 +7,7 @@ import classes.InputParameters;
 import com.helpers.RuleResult;
 import com.helpers.AuxiliaryMethods;
 import com.models.HashVector;
+import classes.Part;
 
 rule "A stand alone rule"
 	when
@@ -22,19 +23,17 @@ rule "A stand alone rule"
 									  $assemblyNode1 != this,
 									  $part2 : part,
 									  ((Class)$params["ScrewNut"]).isAssignableFrom($part2.class),
-									  $ref2 : ref
-									  //AuxiliaryMethods.getField("getLength", $part1) > AuxiliaryMethods.getDistance($ref1, $ref2)
-									  )
+									  $ref2 : ref,
+									  AuxiliaryMethods.getField("getLength", $part1) > AuxiliaryMethods.getDistance($ref1, $ref2))
 		$assemblyNode3 : AssemblyNode(
 									  $assemblyNode1 != this,
 									  $assemblyNode2 != this,
 									  $part3 : part,
 									  ((Class)$params["Washer"]).isAssignableFrom($part3.class),
-									  $ref3 : ref
-									  //AuxiliaryMethods.getField("getLength", $part1) > AuxiliaryMethods.getDistance($ref1, $ref3),
-									  //AuxiliaryMethods.getField("getLength", $part1) > AuxiliaryMethods.getDistance($ref2, $ref3),
-									  //AuxiliaryMethods.getTriangleArea($ref1, $ref2, $ref3) < 0.000001
-									  )
+									  $ref3 : ref,
+									  AuxiliaryMethods.getField("getLength", $part1) > AuxiliaryMethods.getDistance($ref1, $ref3),
+									  AuxiliaryMethods.getField("getLength", $part1) > AuxiliaryMethods.getDistance($ref2, $ref3),
+									  AuxiliaryMethods.getTriangleArea($ref1, $ref2, $ref3) < 0.000001)
 	then
 		HashVector result = new HashVector();
 		result.addPart($part1);

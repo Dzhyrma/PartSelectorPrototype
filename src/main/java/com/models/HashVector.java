@@ -40,12 +40,18 @@ public class HashVector {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (obj == null || getClass() != obj.getClass())
 			return false;
 		HashVector other = (HashVector) obj;
-		return this.hashCode() == other.hashCode();
+		if (this.parts == other.parts)
+			return true;
+		if (other.parts == null || this.parts == null || other.parts.size() != this.parts.size())
+			return false;
+		for (int i = 0; i < other.parts.size(); i++) {
+			if (this.parts.get(i).getName().compareTo(other.parts.get(i).getName()) != 0)
+				return false;
+		}
+		return true;
 	}
 
 }
