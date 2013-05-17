@@ -35,6 +35,7 @@ import org.drools.logger.KnowledgeRuntimeLogger;
 import org.drools.logger.KnowledgeRuntimeLoggerFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 
+import com.helpers.AssemblyReader;
 import com.helpers.ClassCompiler;
 import com.helpers.ClassGenerator;
 import com.helpers.ClassReader;
@@ -61,6 +62,7 @@ public class DroolsTest {
 	private static int NUMBER_OF_INSTANCES = 200;
 
 	public static final void main(String[] args) throws IOException {
+		System.out.println(AssemblyReader.readAssemblyFromXML("Assembly.xml"));
 		PartReader p = new PartReader();
 		p.loadInstances("./din128b.par");
 
@@ -113,9 +115,6 @@ public class DroolsTest {
 				kbe.setAssembly(someAssembly);
 				RankComparator rc = new RankComparator(kbe.extractKnowledge());
 				Collections.sort((List<HashVector>) result, rc);
-				for (HashVector hashVector : result) {
-	                
-                }
 				System.out.println(result);
 			}
 			//logger.close();
@@ -186,15 +185,9 @@ public class DroolsTest {
 		
 		Assembly assembly = new Assembly("main assemby");
 		Assembly bg1 = new Assembly("BG1");
-		AssemblyNode screwNode = new AssemblyNode();
-		AssemblyNode screwNutNode = new AssemblyNode();
-		AssemblyNode washerNode = new AssemblyNode();
-		screwNode.setPart(screw1);
-		screwNode.setRef(new Reference(0, 0, 0));
-		screwNutNode.setPart(screwNut1);
-		screwNutNode.setRef(new Reference(0, 0, 5));
-		washerNode.setPart(washer1);
-		washerNode.setRef(new Reference(0, 0, 4));
+		AssemblyNode screwNode = new AssemblyNode(screw1, new Reference(Double.valueOf(0), Double.valueOf(0), Double.valueOf(0)));
+		AssemblyNode screwNutNode = new AssemblyNode(screwNut1, new Reference(Double.valueOf(0), Double.valueOf(0), Double.valueOf(5)));
+		AssemblyNode washerNode = new AssemblyNode(washer1, new Reference(Double.valueOf(0), Double.valueOf(0), Double.valueOf(4)));
 		bg1.addNode(screwNode);
 		bg1.addNode(screwNutNode);
 		bg1.addNode(washerNode);

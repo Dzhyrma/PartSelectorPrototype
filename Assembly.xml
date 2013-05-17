@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Assembly name="AS1">
+	<Assembly name="BG1">
+		<Part name="Federring_DIN_127-A17">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Mutter_M_16_DIN_934">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Scheibe_A_17_DIN_125">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Schraube_M_16x130_DIN_912">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+	</Assembly>
+	<Assembly name="BG2">
+		<Part name="Federring_DIN_127-A25">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Mutter_M_24_DIN_934">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Scheibe_A_25_DIN_125">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Schraube_M_24x130_DIN_912">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+	</Assembly>
+	<Assembly name="BG3">
+		<Part name="Federring_DIN_127-A17">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Mutter_M_16_DIN_934">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Scheibe_A_17_DIN_125">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Schraube_M_16x150_DIN_931">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+	</Assembly>
+	<Assembly name="BG4">
+		<Part name="Federring_DIN_127-A17">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Mutter_M_16_DIN_934">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Scheibe_A_17_DIN_125">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Schraube_M_16x150_DIN_931">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+	</Assembly>
+	<Assembly name="BG5">
+		<Part name="Senkschraube_M16x100_ISO_10642">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+	</Assembly>
+	<Assembly name="BG6">
+		<Part name="Federring_DIN_127-A17">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Mutter_M_16_DIN_934">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Scheibe_A_17_DIN_125">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Sechskantschraube_DIN_6921_M16_x_150">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+	</Assembly>
+	<Assembly name="BG7">
+		<Part name="Federring_DIN_127-A17">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Mutter_M_16_DIN_555">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Scheibe_A_17_DIN_125">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Zylinderschraube_EN_ISO_14579_M16x130">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+	</Assembly>
+	<Assembly name="BG8">
+		<Part name="Scheibe_A_17_DIN_125">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+		<Part name="Schraube_M_16x100_DIN_933">
+			<refPt X="100" Y="200.550" Z="100.580"></refPt>
+		</Part>
+	</Assembly>
+</Assembly>
