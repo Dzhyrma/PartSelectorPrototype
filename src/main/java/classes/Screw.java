@@ -1,5 +1,7 @@
 package classes;
 
+import com.techsoft.partselector.model.Part;
+
 public class Screw extends Part {
 	private int headDiameter;
 	private int length;

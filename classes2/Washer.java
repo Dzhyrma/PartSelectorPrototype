@@ -1,34 +1,35 @@
-public class Washer {
-	public Double innerDiameter;
-	public String name;
-	public int outerDiameter;
-	public int thickness;
+import com.techsoft.partselector.model.Part;
+
+public class Washer extends Part{
+	public double innerDiameter;
+	public double outerDiameter;
+	public double thickness;
 	
-	public final Double getInnerDiameter() {
+	public Washer(String name) {
+		super(name);
+	}
+	
+	public final double getInnerDiameter() {
 		return this.innerDiameter;
 	}
 
-	public final String getName() {
-		return this.name;
-	}
-
-	public final int getOuterDiameter() {
+	public final double getOuterDiameter() {
 		return this.outerDiameter;
 	}
 
-	public final int getThickness() {
+	public final double getThickness() {
 		return this.thickness;
 	}
 
-	public final void setInnerDiameter(Double innerDiameter) {
+	public final void setInnerDiameter(double innerDiameter) {
 		this.innerDiameter = innerDiameter;
 	}
 
-	public final void setOuterDiameter(int outerDiameter) {
+	public final void setOuterDiameter(double outerDiameter) {
 		this.outerDiameter = outerDiameter;
 	}
 
-	public final void setThickness(int thickness) {
+	public final void setThickness(double thickness) {
 		this.thickness = thickness;
 	}
 }

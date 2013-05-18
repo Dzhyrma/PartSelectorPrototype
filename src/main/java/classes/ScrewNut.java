@@ -1,5 +1,7 @@
 package classes;
 
+import com.techsoft.partselector.model.Part;
+
 public class ScrewNut extends Part {
 	private int height;
 	private int nominalDiameter;

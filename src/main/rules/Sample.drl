@@ -1,10 +1,10 @@
 package com.sample
 
 import classes.InputParameters;
-import classes.Part;
-import com.models.HashVector;
-import com.helpers.RuleResult;
-import com.helpers.AuxiliaryMethods;
+import com.techsoft.partselector.model.Part;
+import com.techsoft.partselector.model.HashVector;
+import com.techsoft.partselector.util.RuleResult;
+import com.techsoft.partselector.util.AuxiliaryMethods;
 
 /*rule "Geometrical Rule"
 	when

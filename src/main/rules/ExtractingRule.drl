@@ -1,13 +1,13 @@
 //created on: 15-May-2013
 package main
 
-import com.models.AssemblyNode;
-import com.models.Reference;
+import com.techsoft.partselector.model.AssemblyNode;
+import com.techsoft.partselector.model.Reference;
 import classes.InputParameters;
-import com.helpers.RuleResult;
-import com.helpers.AuxiliaryMethods;
-import com.models.HashVector;
-import classes.Part;
+import com.techsoft.partselector.util.RuleResult;
+import com.techsoft.partselector.util.AuxiliaryMethods;
+import com.techsoft.partselector.model.HashVector;
+import com.techsoft.partselector.model.Part;
 
 rule "A stand alone rule"
 	when
