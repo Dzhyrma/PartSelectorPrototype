@@ -1,0 +1,8 @@
+May 19, 2013 2:30:07 PM com.techsoft.partselector.util.rules.RuleLibrary getInstance
+WARNING: rule_lib.obj (The system cannot find the file specified)
+May 19, 2013 2:30:07 PM com.techsoft.partselector.util.rules.RuleLibrary getInstance
+INFO: New rule library was created!
+May 19, 2013 2:35:37 PM com.techsoft.partselector.util.rules.RuleLibrary getInstance
+WARNING: rule_lib.obj (The system cannot find the file specified)
+May 19, 2013 2:35:38 PM com.techsoft.partselector.util.rules.RuleLibrary getInstance
+INFO: New rule library was created!

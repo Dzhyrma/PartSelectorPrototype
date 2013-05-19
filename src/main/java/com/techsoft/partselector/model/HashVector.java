@@ -59,8 +59,15 @@ public class HashVector implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder();
+		boolean first = true;
 		for (Part part : this.parts)
-			result.append(part.getClass().getName()).append(": ").append(part.getName()).append('\n');
+			if (!first)
+				result.append(", ").append(part.getClass().getName()).append(": ").append(part.getName());
+			else {
+				result.append('[').append(part.getClass().getName()).append(": ").append(part.getName());
+				first = false;
+			}
+		result.append(']');
 		return result.toString();
 	}
 

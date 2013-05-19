@@ -68,7 +68,7 @@ public class LibraryPanel extends JPanel implements ActionListener, ListSelectio
 		this.classList.setLayoutOrientation(JList.VERTICAL);
 		this.classList.setVisibleRowCount(-1);
 		this.classList.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED)));
-		JScrollPane classListScroller = new JScrollPane(this.classList);
+		final JScrollPane classListScroller = new JScrollPane(this.classList);
 		classListScroller.setPreferredSize(new Dimension(150, 100));
 		classListScroller.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED), "Classes"));
 
@@ -78,7 +78,7 @@ public class LibraryPanel extends JPanel implements ActionListener, ListSelectio
 		this.partList.setLayoutOrientation(JList.VERTICAL);
 		this.partList.setVisibleRowCount(-1);
 		this.partList.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED)));
-		JScrollPane partListScroller = new JScrollPane(this.partList);
+		final JScrollPane partListScroller = new JScrollPane(this.partList);
 		partListScroller.setPreferredSize(new Dimension(210, 100));
 		partListScroller.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED), "Parts"));
 
@@ -150,7 +150,7 @@ public class LibraryPanel extends JPanel implements ActionListener, ListSelectio
 		} else if (e.getSource() == this.deleteClassButton) {
 			int result =
 			    JOptionPane.showConfirmDialog(this.mainFrame,
-			                    "This operation will delete also inherited classes.\nAre you sure you want to delete this class?", "Deleting class",
+			                    "This operation will delete also inherited classes.\nAre you sure you want to delete this class?", "Class deleting",
 			                    JOptionPane.YES_NO_OPTION);
 			if (result == JOptionPane.YES_OPTION) {
 				if (!FileRemover.removeClass(this.classList.getSelectedValue().toString())) {

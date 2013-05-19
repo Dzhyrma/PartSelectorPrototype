@@ -3,9 +3,9 @@ package main
 
 import com.techsoft.partselector.model.AssemblyNode;
 import com.techsoft.partselector.model.Reference;
-import com.techsoft.partselector.util.InputParameters;
-import com.techsoft.partselector.util.RuleResult;
-import com.techsoft.partselector.util.AuxiliaryMethods;
+import com.techsoft.partselector.util.rules.InputParameters;
+import com.techsoft.partselector.util.rules.RuleResult;
+import com.techsoft.partselector.util.rules.AuxiliaryMethods;
 import com.techsoft.partselector.model.HashVector;
 import com.techsoft.partselector.model.Part;
 

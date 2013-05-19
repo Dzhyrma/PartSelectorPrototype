@@ -2,8 +2,6 @@ package com.techsoft.partselector.ui.frame;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Enumeration;
@@ -20,7 +18,7 @@ import com.techsoft.partselector.ui.panel.KnowledgePanel;
 import com.techsoft.partselector.ui.panel.LibraryPanel;
 import com.techsoft.partselector.ui.panel.RuleBasedSelectorPanel;
 
-public class MainFrame extends JFrame implements WindowListener, ActionListener {
+public class MainFrame extends JFrame implements WindowListener {
 
 	private static final long serialVersionUID = 8073600424665819047L;
 
@@ -41,19 +39,12 @@ public class MainFrame extends JFrame implements WindowListener, ActionListener 
 		this.ruleBasedSelector = new RuleBasedSelectorPanel(this);
 		JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, this.knowledgePanel, this.ruleBasedSelector);
 		splitPane.setOneTouchExpandable(true);
-		splitPane.setDividerLocation(300);
+		splitPane.setDividerLocation(500);
 		splitPane.setBorder(null);
 
-		/*layout.setHorizontalGroup(layout.createSequentialGroup().addComponent(this.libraryPanel).addGroup(
-		                layout.createParallelGroup().addComponent(this.ruleBasedSelector).addComponent(this.knowledgePanel)));
-		layout.setVerticalGroup(layout.createSequentialGroup().addGroup(
-		                layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(this.libraryPanel).addGroup(
-		                                layout.createSequentialGroup().addComponent(this.knowledgePanel).addComponent(this.ruleBasedSelector))));*/
 		layout.setHorizontalGroup(layout.createSequentialGroup().addComponent(this.libraryPanel).addComponent(splitPane));
 		layout.setVerticalGroup(layout.createSequentialGroup().addGroup(
 		                layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(this.libraryPanel).addComponent(splitPane)));
-
-		//layout.linkSize(SwingConstants.HORIZONTAL, findButton, cancelButton);
 	}
 
 	private void initFrame() {
@@ -75,12 +66,6 @@ public class MainFrame extends JFrame implements WindowListener, ActionListener 
 			if (value != null && value instanceof FontUIResource)
 				UIManager.put(key, f);
 		}
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

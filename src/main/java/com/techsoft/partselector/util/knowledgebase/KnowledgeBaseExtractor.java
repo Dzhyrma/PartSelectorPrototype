@@ -14,9 +14,9 @@ import org.drools.runtime.StatefulKnowledgeSession;
 
 import com.techsoft.partselector.consts.Paths;
 import com.techsoft.partselector.model.*;
-import com.techsoft.partselector.util.InputParameters;
-import com.techsoft.partselector.util.RuleResult;
 import com.techsoft.partselector.util.reflect.ClassReader;
+import com.techsoft.partselector.util.rules.InputParameters;
+import com.techsoft.partselector.util.rules.RuleResult;
 
 public class KnowledgeBaseExtractor {
 	private KnowledgeBase knowledgeBase;

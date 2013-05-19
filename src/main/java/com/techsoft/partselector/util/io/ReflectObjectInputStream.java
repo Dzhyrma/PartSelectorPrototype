@@ -11,8 +11,15 @@ public class ReflectObjectInputStream extends ObjectInputStream {
 
 	@Override
 	protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException {
-		Class<?> result = ClassReader.getInstance().loadClass(desc.getName());
-		ObjectStreamClass resultDesc = ObjectStreamClass.lookup(result);
+		Class<?> result;
+		try {
+			result = ClassReader.getInstance().loadClass(desc.getName());
+		} catch (ClassNotFoundException e) {
+			return super.resolveClass(desc);
+		}
+		ObjectStreamClass resultDesc = ObjectStreamClass.lookupAny(result);
+		if (resultDesc == null)
+			return super.resolveClass(desc);
 		if (resultDesc.getSerialVersionUID() != desc.getSerialVersionUID())
 			throw new ClassNotFoundException("Serial Versions of UID in classes '" + desc.getName() + "' are different!");
 		return result;

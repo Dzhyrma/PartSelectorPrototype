@@ -11,7 +11,7 @@ public class RankComparator<T extends HashVector> implements Comparator<T> {
 	private Map<T, Integer> frequency;
 	
 	public RankComparator (Map<T, Integer> frequency) {
-		this.frequency = new HashMap<T, Integer>(frequency); 
+		this.frequency = new HashMap<T, Integer>(frequency);
 	}
 
 	@Override

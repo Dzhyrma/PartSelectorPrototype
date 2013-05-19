@@ -1,0 +1,4 @@
+May 19, 2013 5:13:07 PM com.techsoft.partselector.util.knowledgebase.HistoryKnowledgeBase getInstance
+WARNING: com.techsoft.partselector.util.knowledgebase.KnowledgeBase
+May 19, 2013 5:13:07 PM com.techsoft.partselector.util.knowledgebase.HistoryKnowledgeBase getInstance
+INFO: New knowledge base was created!

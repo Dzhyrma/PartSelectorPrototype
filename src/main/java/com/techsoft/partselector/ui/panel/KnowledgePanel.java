@@ -28,7 +28,7 @@ import com.techsoft.partselector.model.HashVector;
 import com.techsoft.partselector.ui.util.ImageUtility;
 import com.techsoft.partselector.util.io.AssemblyReader;
 import com.techsoft.partselector.util.io.ExtensionFileFilter;
-import com.techsoft.partselector.util.knowledgebase.KnowledgeBase;
+import com.techsoft.partselector.util.knowledgebase.HistoryKnowledgeBase;
 import com.techsoft.partselector.util.knowledgebase.KnowledgeBaseExtractor;
 
 public class KnowledgePanel extends JPanel implements ActionListener, ListSelectionListener {
@@ -66,13 +66,13 @@ public class KnowledgePanel extends JPanel implements ActionListener, ListSelect
 		this.assemblyTextArea = new JTextArea();
 		this.assemblyTextArea.setEditable(false);
 		this.assemblyTextArea.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED)));
-		JScrollPane assemblyTextAreaScroller = new JScrollPane(this.assemblyTextArea);
+		final JScrollPane assemblyTextAreaScroller = new JScrollPane(this.assemblyTextArea);
 		assemblyTextAreaScroller.setPreferredSize(new Dimension(150, 100));
 		assemblyTextAreaScroller.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED), "Assembly parsing result"));
 		this.resultTextArea = new JTextArea();
 		this.resultTextArea.setEditable(false);
 		this.resultTextArea.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED)));
-		JScrollPane resultTextAreaScroller = new JScrollPane(this.resultTextArea);
+		final JScrollPane resultTextAreaScroller = new JScrollPane(this.resultTextArea);
 		resultTextAreaScroller.setPreferredSize(new Dimension(150, 100));
 		resultTextAreaScroller.setBorder(BorderFactory
 		                .createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED), "Extracting rule fire results"));
@@ -100,7 +100,6 @@ public class KnowledgePanel extends JPanel implements ActionListener, ListSelect
 	private void updateComboBox() {
 		File dir = new File(Paths.RULES_PATH + Paths.EXTRACTION_RULES_PATH);
 		File[] fileList = dir.listFiles(new FilenameFilter() {
-
 			@Override
 			public boolean accept(File dir, String name) {
 				return name.endsWith(".drl");
@@ -137,7 +136,7 @@ public class KnowledgePanel extends JPanel implements ActionListener, ListSelect
 				resultText.append('(').append(this.fireResultMap.get(hashVector)).append(")\n").append(hashVector).append('\n');
 			this.resultTextArea.setText(resultText.toString());
 		} else if (e.getSource() == this.addResultButton) {
-			KnowledgeBase.getInstance().update(this.fireResultMap);
+			HistoryKnowledgeBase.getInstance().update(this.fireResultMap);
 			this.fireResultMap = null;
 			this.resultTextArea.setText("");
 			this.addResultButton.setEnabled(false);

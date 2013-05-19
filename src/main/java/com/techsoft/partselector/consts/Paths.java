@@ -14,6 +14,8 @@ public class Paths {
 	public static final String ASSEMBLING_RULES_PATH = "assembling/";
 	public static final String EXTRACTION_RULES_PATH = "extraction/";
 	
-	public static final String KB_FILE_PATH = "kb.obj";
-	public static final String PART_LIB_FILE_PATH = "part_lib.obj";
+	public static final String DATA_FILES_PATH = "";
+	public static final String KB_FILE_PATH = DATA_FILES_PATH + "kb.obj";
+	public static final String PART_LIB_FILE_PATH = DATA_FILES_PATH + "part_lib.obj";
+	public static final String RULE_LIB_FILE_PATH = DATA_FILES_PATH + "rule_lib.obj";
 }

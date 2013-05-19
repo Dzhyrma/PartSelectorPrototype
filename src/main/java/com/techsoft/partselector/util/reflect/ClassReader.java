@@ -19,6 +19,8 @@ public class ClassReader extends URLClassLoader {
 	private static final Logger LOGGER = SimpleLogger.getLogger(ClassReader.class);
 	private static volatile ClassReader instance;
 	//private static URLClassLoader classLoader;
+	private static final Map<String, Class<?>> stringPrimitivesMap;
+	private static final Map<Character, Class<?>> charPrimitivesMap;
 	private static URL[] urls;
 	static {
 		File dir = new File(Paths.CLASS_PATH);
@@ -28,6 +30,26 @@ public class ClassReader extends URLClassLoader {
 			LOGGER.log(Level.SEVERE, "Wrong class path");
 			System.exit(0);
 		}
+
+		stringPrimitivesMap = new HashMap<String, Class<?>>();
+		stringPrimitivesMap.put("boolean", boolean.class);
+		stringPrimitivesMap.put("byte", byte.class);
+		stringPrimitivesMap.put("char", char.class);
+		stringPrimitivesMap.put("double", double.class);
+		stringPrimitivesMap.put("float", float.class);
+		stringPrimitivesMap.put("int", int.class);
+		stringPrimitivesMap.put("long", long.class);
+		stringPrimitivesMap.put("short", short.class);
+		
+		charPrimitivesMap = new HashMap<Character, Class<?>>();
+		charPrimitivesMap.put(Character.valueOf('Z'), boolean.class);
+		charPrimitivesMap.put(Character.valueOf('B'), byte.class);
+		charPrimitivesMap.put(Character.valueOf('C'), char.class);
+		charPrimitivesMap.put(Character.valueOf('D'), double.class);
+		charPrimitivesMap.put(Character.valueOf('F'), float.class);
+		charPrimitivesMap.put(Character.valueOf('I'), int.class);
+		charPrimitivesMap.put(Character.valueOf('J'), long.class);
+		charPrimitivesMap.put(Character.valueOf('S'), short.class);
 	}
 
 	private ClassReader() {
@@ -37,7 +59,8 @@ public class ClassReader extends URLClassLoader {
 	private Class<?> loadWithPrimitives(String className) throws ClassNotFoundException {
 		if (className == null || className.length() == 0)
 			return null;
-		className = className.replaceFirst(";", "");
+		if (stringPrimitivesMap.containsKey(className))
+			return stringPrimitivesMap.get(className);
 		int arrayDimension = 0;
 		while (className.charAt(arrayDimension) == '[')
 			arrayDimension++;
@@ -45,37 +68,10 @@ public class ClassReader extends URLClassLoader {
 		if (type.length() == 0)
 			return null;
 		Class<?> clazz;
-		if (type.length() == 1) {
-			switch (type.charAt(0)) {
-			case 'Z':
-				clazz = boolean.class;
-				break;
-			case 'B':
-				clazz = byte.class;
-				break;
-			case 'C':
-				clazz = char.class;
-				break;
-			case 'D':
-				clazz = double.class;
-				break;
-			case 'F':
-				clazz = float.class;
-				break;
-			case 'I':
-				clazz = int.class;
-				break;
-			case 'J':
-				clazz = long.class;
-				break;
-			case 'S':
-				clazz = short.class;
-				break;
-			default:
-				return null;
-			}
-		} else if (type.charAt(0) == 'L')
-			clazz = this.loadClass(type.substring(1), true);
+		if (type.length() == 1 && charPrimitivesMap.containsKey(type.charAt(0)))
+			clazz = charPrimitivesMap.get(type.charAt(0));
+		else if (type.charAt(0) == 'L' && type.charAt(type.length() - 1) == ';')
+			clazz = this.loadClass(type.substring(1, type.length() - 1), true);
 		else
 			clazz = this.loadClass(type, true);
 		if (arrayDimension > 0)
