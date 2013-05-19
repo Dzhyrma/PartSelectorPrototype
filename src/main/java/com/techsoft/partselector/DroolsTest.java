@@ -2,12 +2,8 @@ package com.techsoft.partselector;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
-
 import org.drools.KnowledgeBase;
 import org.drools.KnowledgeBaseFactory;
 import org.drools.builder.KnowledgeBuilder;
@@ -18,24 +14,12 @@ import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 
-import com.techsoft.partselector.model.Assembly;
-import com.techsoft.partselector.model.AssemblyNode;
-import com.techsoft.partselector.model.HashVector;
 import com.techsoft.partselector.model.Part;
-import com.techsoft.partselector.model.Reference;
-import com.techsoft.partselector.util.KnowledgeBaseExtractor;
-import com.techsoft.partselector.util.RuleResult;
+import com.techsoft.partselector.util.InputParameters;
 import com.techsoft.partselector.util.io.AssemblyReader;
-import com.techsoft.partselector.util.io.ClassReader;
 import com.techsoft.partselector.util.io.PartReader;
 import com.techsoft.partselector.util.reflect.ClassCompiler;
-import com.techsoft.partselector.util.comparator.RankComparator;
-
-import classes.EyeScrew;
-import classes.InputParameters;
-import classes.Screw;
-import classes.ScrewNut;
-import classes.Washer;
+import com.techsoft.partselector.util.reflect.ClassReader;
 
 /** This is a sample class to launch a rule. */
 public class DroolsTest {
@@ -71,6 +55,8 @@ public class DroolsTest {
 			StatefulKnowledgeSession ksession = null;
 			//KnowledgeRuntimeLogger logger = KnowledgeRuntimeLoggerFactory.newFileLogger(ksession, "test");
 			// go !
+			
+			/*
 			for (int j = 100; j <= 100; j++) {
 				Assembly someAssembly = null;
 				NUMBER_OF_INSTANCES = j;
@@ -88,20 +74,19 @@ public class DroolsTest {
 				System.out.println(RuleResult.getInstance().getResults());
 				List<HashVector> result = RuleResult.getInstance().getResults();
 				KnowledgeBaseExtractor kbe = new KnowledgeBaseExtractor();
-				kbe.setAssembly(someAssembly);
-				RankComparator<HashVector> rc = new RankComparator<HashVector>(kbe.extractKnowledge());
+				RankComparator<HashVector> rc = new RankComparator<HashVector>(kbe.extractKnowledge(someAssembly, "ExtractingRule.drl"));
 				Collections.sort(result, rc);
 				System.out.println(result);
-			}
+			}*/
 			//logger.close();
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
 	}
-
+	/*
 	private static Assembly initFacts(StatefulKnowledgeSession ksession) {
 		inputParameters = new InputParameters();
-		Map<String, Object> parameters = new HashMap<String, Object>();
+		Map<String, Object> parameters = new HashMap<String, Object>(ClassReader.getInstance().getClassMap());
 		parameters.put("Dbore", 17);
 		parameters.put("Lclamp", 29);
 		parameters.put("MinGap", 1);
@@ -109,9 +94,6 @@ public class DroolsTest {
 		parameters.put("MaxOverlap", 10);
 		parameters.put("WasherMinGap", 1);
 		parameters.put("WasherMinOverlap", 0);
-		parameters.put("Screw", Screw.class);
-		parameters.put("ScrewNut", ScrewNut.class);
-		parameters.put("Washer", Washer.class);
 		inputParameters.setParameters(parameters);
 
 		ksession.insert(inputParameters);
@@ -166,7 +148,7 @@ public class DroolsTest {
 		assembly.addAssembly(bg1);
 		
 		return assembly;
-	}
+	}*/
 
 	private static KnowledgeBase readKnowledgeBase() throws Exception {
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();

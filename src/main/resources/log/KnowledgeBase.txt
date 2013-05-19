@@ -1,0 +1,28 @@
+May 19, 2013 2:31:43 AM com.techsoft.partselector.util.knowledgebase.KnowledgeBase getInstance
+WARNING: kb.obj (The system cannot find the file specified)
+May 19, 2013 2:31:43 AM com.techsoft.partselector.util.knowledgebase.KnowledgeBase getInstance
+INFO: New knowledge base was created!
+May 19, 2013 2:32:37 AM com.techsoft.partselector.util.knowledgebase.KnowledgeBase saveLibrary
+WARNING: com.techsoft.partselector.model.HashVector
+May 19, 2013 2:35:20 AM com.techsoft.partselector.util.knowledgebase.KnowledgeBase getInstance
+WARNING: writing aborted; java.io.NotSerializableException: com.techsoft.partselector.model.HashVector
+May 19, 2013 2:35:20 AM com.techsoft.partselector.util.knowledgebase.KnowledgeBase getInstance
+INFO: New knowledge base was created!
+May 19, 2013 2:35:20 AM com.techsoft.partselector.util.knowledgebase.KnowledgeBase saveLibrary
+WARNING: java.io.NotSerializableException: com.techsoft.partselector.model.HashVector
+May 19, 2013 2:35:56 AM com.techsoft.partselector.util.knowledgebase.KnowledgeBase getInstance
+WARNING: writing aborted; java.io.NotSerializableException: com.techsoft.partselector.model.HashVector
+May 19, 2013 2:35:56 AM com.techsoft.partselector.util.knowledgebase.KnowledgeBase getInstance
+INFO: New knowledge base was created!
+May 19, 2013 2:36:51 AM com.techsoft.partselector.util.knowledgebase.KnowledgeBase getInstance
+WARNING: [Ljava.lang.Object;
+May 19, 2013 2:36:51 AM com.techsoft.partselector.util.knowledgebase.KnowledgeBase getInstance
+INFO: New knowledge base was created!
+May 19, 2013 2:39:56 AM com.techsoft.partselector.util.knowledgebase.KnowledgeBase getInstance
+WARNING: [Ljava.lang.Object;
+May 19, 2013 2:39:56 AM com.techsoft.partselector.util.knowledgebase.KnowledgeBase getInstance
+INFO: New knowledge base was created!
+May 19, 2013 3:27:30 AM com.techsoft.partselector.util.knowledgebase.KnowledgeBase getInstance
+WARNING: [Ljava.lang.Object;
+May 19, 2013 3:27:30 AM com.techsoft.partselector.util.knowledgebase.KnowledgeBase getInstance
+INFO: New knowledge base was created!

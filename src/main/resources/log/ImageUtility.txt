@@ -1,0 +1,14 @@
+May 18, 2013 8:29:19 PM com.techsoft.partselector.ui.util.ImageUtility createImageIcon
+INFO: Couldn't find file: plus.png
+May 18, 2013 8:29:19 PM com.techsoft.partselector.ui.util.ImageUtility createImageIcon
+INFO: Couldn't find file: plus.png
+May 18, 2013 8:29:19 PM com.techsoft.partselector.ui.util.ImageUtility createImageIcon
+INFO: Couldn't find file: cross.png
+May 18, 2013 8:29:19 PM com.techsoft.partselector.ui.util.ImageUtility createImageIcon
+INFO: Couldn't find file: cross.png
+May 18, 2013 8:29:19 PM com.techsoft.partselector.ui.util.ImageUtility createImageIcon
+INFO: Couldn't find file: arrow.png
+May 19, 2013 5:01:07 AM com.techsoft.partselector.ui.util.ImageUtility loadIcon
+INFO: Couldn't find file: C:\Users\Andrii\Documents\din128b\din128b.bmp
+May 19, 2013 5:01:22 AM com.techsoft.partselector.ui.util.ImageUtility loadIcon
+INFO: Couldn't find file: D:\Univ\Master Thesis\2013.01.29\metadate_params\gewstifte\dinen_27436\dinen_27436.bmp

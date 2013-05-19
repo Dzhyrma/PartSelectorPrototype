@@ -1,10 +1,14 @@
 package com.techsoft.partselector.model;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
 
-public class HashVector {
+public class HashVector implements Serializable {
+
+	private static final long serialVersionUID = -285110250839741151L;
+
 	private int prime = 31;
 	private int hashCode = 31;
 	private Vector<Part> parts;
@@ -50,6 +54,14 @@ public class HashVector {
 				return false;
 		}
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		for (Part part : this.parts)
+			result.append(part.getClass().getName()).append(": ").append(part.getName()).append('\n');
+		return result.toString();
 	}
 
 }

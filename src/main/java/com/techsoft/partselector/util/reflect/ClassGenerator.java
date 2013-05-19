@@ -6,23 +6,21 @@ import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-
 import com.techsoft.partselector.consts.Paths;
 import com.techsoft.partselector.model.Part;
 
 public class ClassGenerator {
 	private static final String CLASS_TEMPLATE = "public class %s {%n%s}";
 	//private static final String DEFAULT_CONSTRUCTOR_TEMPLATE = "\tpublic String name;%n%n\tpublic %s(String name) {%n\t\tthis.name = name;%n\t}%n%n";
+	private static final String SERIAL_VERSION_UID_TEMPLATE = "%n\tprivate static final long serialVersionUID = %dL;%n%n";
 	private static final String FIELD_TEMPLATE = "\tpublic %s %s;%n";
 	private static final String GETTER_TEMPLATE = "\tpublic final %s get%s() {%n\t\treturn this.%s;%n\t}%n%n";
 	private static final String NAME_STRING = "name";
 	private static final String SETTER_TEMPLATE = "\tpublic final void set%s(%s %s) {%n\t\tthis.%s = %s;%n\t}%n%n";
 	private static final String SUPER_CLASS_CONSTRUCTOR_TEMPLATE = "%n\tpublic %s(String name) {%n\t\tsuper(name);%n\t}%n%n";
 
-	private Set<String> declaredFields = new HashSet<String>();
+	private Map<String, Class<?>> declaredFields = new HashMap<String, Class<?>>();
 	private Map<String, Class<?>> fields = new HashMap<String, Class<?>>();
 	private String name;
 	private Class<?> superClass = Part.class;
@@ -33,12 +31,13 @@ public class ClassGenerator {
 		this.name = someClass.getName();
 		this.superClass = someClass.getSuperclass();
 		for (Field field : someClass.getDeclaredFields())
-			this.fields.put(field.getName(), field.getType());
+			if (field.getModifiers() == Modifier.PUBLIC)
+				this.fields.put(field.getName(), field.getType());
 		Class<?> superClass = this.superClass;
 		while (superClass != null) {
 			for (Field field : superClass.getDeclaredFields())
 				if (field.getModifiers() == Modifier.PUBLIC)
-					this.declaredFields.add(field.getName());
+					this.declaredFields.put(field.getName(), field.getType());
 			superClass = superClass.getSuperclass();
 		}
 	}
@@ -64,7 +63,7 @@ public class ClassGenerator {
 	}
 
 	public boolean isFieldExists(String fieldName) {
-		if (fieldName.equals(NAME_STRING) || this.declaredFields.contains(fieldName) || this.fields.containsKey(fieldName))
+		if (fieldName.equals(NAME_STRING) || this.declaredFields.containsKey(fieldName) || this.fields.containsKey(fieldName))
 			return true;
 		return false;
 	}
@@ -79,6 +78,17 @@ public class ClassGenerator {
 		StringBuilder fields = new StringBuilder();
 		StringBuilder getters = new StringBuilder();
 		StringBuilder setters = new StringBuilder();
+
+		long serialVersionUID = 0L;
+		long prime = 31L;
+		for (String key : this.declaredFields.keySet())
+			serialVersionUID += (long)this.declaredFields.get(key).getName().hashCode() + (long)prime * key.hashCode();
+		for (String key : this.fields.keySet()) {
+			serialVersionUID += (long)this.fields.get(key).getName().hashCode() + (long)prime * key.hashCode();
+		}
+		fields.append(String.format(SERIAL_VERSION_UID_TEMPLATE, serialVersionUID));
+		serialVersionUID = serialVersionUID == 0L ? 1L : serialVersionUID;
+
 		for (String fieldName : this.fields.keySet()) {
 			if (fieldName.equals(NAME_STRING))
 				continue;
@@ -137,7 +147,7 @@ public class ClassGenerator {
 				return new String[0];
 			String[] result = new String[this.declaredFields.size() + this.fields.size()];
 			int index = 0;
-			for (String string : this.declaredFields)
+			for (String string : this.declaredFields.keySet())
 				result[index++] = string;
 			for (String string : this.fields.keySet())
 				result[index++] = string;

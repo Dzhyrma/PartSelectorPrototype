@@ -23,10 +23,13 @@ public class ClassCompiler {
 	public static boolean compileAllClasses() {
 		File dir = new File(Paths.JAVA_PATH);
 		File[] javaFiles = dir.listFiles(new FilenameFilter() {
+			@Override
 			public boolean accept(File file, String name) {
 				return name.endsWith(".java");
 			}
 		});
+		if (javaFiles == null)
+			return false;
 		JavaCompiler javaCompiler = ToolProvider.getSystemJavaCompiler();
 		if (javaCompiler == null) {
 			System.err.println("JavaCompiler loading failed.");

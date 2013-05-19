@@ -14,6 +14,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.techsoft.partselector.model.*;
+import com.techsoft.partselector.util.knowledgebase.PartLibrary;
 
 public class AssemblyReader {
 
@@ -32,8 +33,9 @@ public class AssemblyReader {
 		if (node == null)
 			return null;
 		Vector<AssemblyNode> result = new Vector<AssemblyNode>();
-		Part part = new Part(node.getAttribute(NAME_STRING));
-		//TODO: Find in the library the part
+		Part part = PartLibrary.getInstance().getPart(node.getAttribute(NAME_STRING));
+		if (part == null)
+			part = new Part(node.getAttribute(NAME_STRING));
 		NodeList nodeList = node.getChildNodes();
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Element childNode = (nodeList.item(i) instanceof Element) ? (Element) nodeList.item(i) : null;

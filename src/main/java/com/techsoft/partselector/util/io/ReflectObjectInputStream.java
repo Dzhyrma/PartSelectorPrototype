@@ -5,11 +5,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectStreamClass;
 
+import com.techsoft.partselector.util.reflect.ClassReader;
+
 public class ReflectObjectInputStream extends ObjectInputStream {
 
 	@Override
 	protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException {
-		return ClassReader.getInstance().loadClass(desc.getName());
+		Class<?> result = ClassReader.getInstance().loadClass(desc.getName());
+		ObjectStreamClass resultDesc = ObjectStreamClass.lookup(result);
+		if (resultDesc.getSerialVersionUID() != desc.getSerialVersionUID())
+			throw new ClassNotFoundException("Serial Versions of UID in classes '" + desc.getName() + "' are different!");
+		return result;
 	}
 
 	protected ReflectObjectInputStream() throws IOException, SecurityException {

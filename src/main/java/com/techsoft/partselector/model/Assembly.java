@@ -41,7 +41,7 @@ public class Assembly {
 	private String toString(StringBuilder offset) {
 		StringBuilder result = new StringBuilder();
 		result.append(offset).append("Assembly [name=").append(this.name).append("]\n");
-		offset.append("\t").toString();
+		offset.append("|    ").toString();
 		for (int i = 0; i < this.nodes.size(); i++)
 			result.append(offset).append(this.nodes.get(i).toString()).append("\n");
 		for (Assembly node : this.forks)
