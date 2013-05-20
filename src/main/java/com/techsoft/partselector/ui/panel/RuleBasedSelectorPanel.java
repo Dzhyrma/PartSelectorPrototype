@@ -46,6 +46,7 @@ import com.techsoft.partselector.ui.util.ImageUtility;
 import com.techsoft.partselector.util.comparator.RankComparator;
 import com.techsoft.partselector.util.knowledgebase.HistoryKnowledgeBase;
 import com.techsoft.partselector.util.knowledgebase.PartLibrary;
+import com.techsoft.partselector.util.reflect.ClassReader;
 import com.techsoft.partselector.util.rules.InputParameters;
 import com.techsoft.partselector.util.rules.RuleLibrary;
 import com.techsoft.partselector.util.rules.RuleModel;
@@ -75,7 +76,7 @@ public class RuleBasedSelectorPanel extends JPanel implements ActionListener {
 
 		this.fireRuleButton = new JButton("Search for the part combinations", ImageUtility.createImageIcon("fire-big.png"));
 		this.fireRuleButton.addActionListener(this);
-		
+
 		this.parametersData = new MyTableModel();
 		this.parametersTable = new JTable(this.parametersData);
 		this.parametersTable.setPreferredScrollableViewportSize(new Dimension(500, 70));
@@ -91,7 +92,8 @@ public class RuleBasedSelectorPanel extends JPanel implements ActionListener {
 		this.classList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.classList.setLayoutOrientation(JList.VERTICAL);
 		this.classList.setCellRenderer(new DefaultListCellRenderer() {
-            private static final long serialVersionUID = 712471325928285602L;
+			private static final long serialVersionUID = 712471325928285602L;
+
 			public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 				super.getListCellRendererComponent(list, value, index, false, false);
 				return this;
@@ -135,8 +137,8 @@ public class RuleBasedSelectorPanel extends JPanel implements ActionListener {
 	private void updateInfo() {
 		RuleModel selectedRule = this.ruleComboBox.getItemAt(this.ruleComboBox.getSelectedIndex());
 		Vector<String> classesToLoad = new Vector<String>();
-		for (Class<?> clazz : selectedRule.getClasses()) {
-			classesToLoad.add(clazz.getName());
+		for (String className : selectedRule.getClasses()) {
+			classesToLoad.add(className);
 		}
 		this.classList.setListData(classesToLoad);
 		List<String> selectedRuleParameters = selectedRule.getParameters();
@@ -163,23 +165,42 @@ public class RuleBasedSelectorPanel extends JPanel implements ActionListener {
 			StatefulKnowledgeSession ksession = this.knowledgeBase.newStatefulKnowledgeSession();
 			InputParameters inputParameters = new InputParameters();
 			Map<String, Object> parameters = this.parametersData.getData();
-			for (Class<?> clazz : selectedRule.getClasses()) {
-				parameters.put(clazz.getName(), clazz);
-				Part[] parts = PartLibrary.getInstance().getParts(clazz);
-				if (parts != null)
-					for (Part part : parts)
-						if (part != null)
-							ksession.insert(new AssemblyNode(part, null));
+			for (String className : selectedRule.getClasses())
+				try {
+					parameters.put(className, ClassReader.getInstance().loadClass(className));
+				} catch (ClassNotFoundException e1) {
+					continue;
+				}
+			for (Class<?> clazz1 : ClassReader.getInstance().getClassMap().values()) {
+				for (String className : selectedRule.getClasses()) {
+					Class<?> clazz2 = null;
+					try {
+						clazz2 = ClassReader.getInstance().loadClass(className);
+					} catch (ClassNotFoundException e1) {
+						continue;
+					}
+					if (clazz2 != null && clazz1 != null && clazz2.isAssignableFrom(clazz1)) {
+						Part[] parts = PartLibrary.getInstance().getParts(clazz1);
+						if (parts != null)
+							for (Part part : parts)
+								if (part != null)
+									ksession.insert(new AssemblyNode(part, null));
+						break;
+					}
+				}
 			}
 			inputParameters.setParameters(parameters);
 			ksession.insert(inputParameters);
 			ksession.fireAllRules();
 			List<HashVector> result = RuleResult.getInstance().getResults();
-			System.out.println(result);
+			if (result == null || result.size() == 0) {
+				JOptionPane.showMessageDialog(this.mainFrame, "Rule based selector did not find any fitting combinations.\nTry to change input parameters.",
+				                "No results", JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
 			RankComparator<HashVector> comparator = HistoryKnowledgeBase.getInstance().getRankComparator();
 			Collections.sort(result, comparator);
 			new ResultFrame(result, this.mainFrame);
-			System.out.println(result);
 		} else if (e.getSource() == this.ruleComboBox) {
 			this.updateInfo();
 		}

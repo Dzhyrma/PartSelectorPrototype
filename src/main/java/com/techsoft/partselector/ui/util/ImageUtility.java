@@ -34,7 +34,7 @@ public class ImageUtility {
 		return null;
 	}
 	
-	/*public static BufferedImage loadIcon(String path) {
+	public static ImageIcon loadIcon(String path) {
 		File file = new File(path);
 		if (!file.exists()) {
 			LOGGER.log(Level.INFO, "Couldn't find file: " + path);
@@ -44,12 +44,12 @@ public class ImageUtility {
 		try {
 			imgURL = file.toURI().toURL();
 			if (imgURL != null)
-				return ImageIO.read(imgURL);
-		} catch (IOException e) {
+				return new ImageIcon(imgURL);
+		} catch (MalformedURLException e) {
 			LOGGER.log(Level.INFO, "URL exception: " + path);
 			return null;
 		}
 		LOGGER.log(Level.INFO, "Couldn't find file: " + path);
 		return null;
-	}*/
+	}
 }

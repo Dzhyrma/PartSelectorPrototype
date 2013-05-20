@@ -35,7 +35,7 @@ public class KnowledgePanel extends JPanel implements ActionListener, ListSelect
 
 	private static final long serialVersionUID = 4107476292153220384L;
 
-	private JButton loadNewAssemblyButton, fireExtractingRuleButton, addResultButton;
+	private JButton loadNewAssemblyButton, fireExtractingRuleButton, addResultButton, clearKnowledgeBaseButton;
 	private final JFrame mainFrame;
 	private JFileChooser fileChooser;
 	private JTextArea assemblyTextArea, resultTextArea;
@@ -62,6 +62,8 @@ public class KnowledgePanel extends JPanel implements ActionListener, ListSelect
 		this.addResultButton = new JButton("Add result to the Knowledge Base", ImageUtility.createImageIcon("gear--plus.png"));
 		this.addResultButton.addActionListener(this);
 		this.addResultButton.setEnabled(false);
+		this.clearKnowledgeBaseButton = new JButton("Clear History Knowledge Base", ImageUtility.createImageIcon("broom--minus.png"));
+		this.clearKnowledgeBaseButton.addActionListener(this);
 
 		this.assemblyTextArea = new JTextArea();
 		this.assemblyTextArea.setEditable(false);
@@ -84,17 +86,17 @@ public class KnowledgePanel extends JPanel implements ActionListener, ListSelect
 		layout.setHorizontalGroup(layout.createSequentialGroup().addGroup(
 		                layout.createParallelGroup().addComponent(this.loadNewAssemblyButton).addComponent(assemblyTextAreaScroller, 300, 300, 300)).addGroup(
 		                layout.createParallelGroup().addComponent(this.fireExtractingRuleButton).addComponent(this.ruleComboBox).addComponent(
-		                                resultTextAreaScroller).addComponent(this.addResultButton)));
+		                                resultTextAreaScroller).addComponent(this.addResultButton).addComponent(this.clearKnowledgeBaseButton)));
 
-		layout.linkSize(SwingConstants.VERTICAL, this.loadNewAssemblyButton, this.fireExtractingRuleButton, this.ruleComboBox);
+		layout.linkSize(SwingConstants.VERTICAL, this.loadNewAssemblyButton, this.fireExtractingRuleButton, this.ruleComboBox, this.clearKnowledgeBaseButton);
 		layout.linkSize(SwingConstants.HORIZONTAL, this.loadNewAssemblyButton, this.fireExtractingRuleButton, this.ruleComboBox, this.addResultButton,
-		                assemblyTextAreaScroller, resultTextAreaScroller);
+		                this.clearKnowledgeBaseButton, assemblyTextAreaScroller, resultTextAreaScroller);
 
 		layout.setVerticalGroup(layout.createSequentialGroup().addGroup(
 		                layout.createParallelGroup().addComponent(this.loadNewAssemblyButton).addComponent(this.fireExtractingRuleButton)).addGroup(
 		                layout.createParallelGroup().addComponent(assemblyTextAreaScroller).addGroup(
 		                                layout.createSequentialGroup().addComponent(this.ruleComboBox).addComponent(this.addResultButton).addComponent(
-		                                                resultTextAreaScroller))));
+		                                                resultTextAreaScroller).addComponent(this.clearKnowledgeBaseButton))));
 	}
 
 	private void updateComboBox() {
@@ -140,8 +142,16 @@ public class KnowledgePanel extends JPanel implements ActionListener, ListSelect
 			this.fireResultMap = null;
 			this.resultTextArea.setText("");
 			this.addResultButton.setEnabled(false);
-			JOptionPane.showMessageDialog(this.mainFrame, "Extracted results were added successfully!", "Knowledge Base Update",
+			JOptionPane.showMessageDialog(this.mainFrame, "Extracted results were added successfully!", "History Knowledge Base update",
 			                JOptionPane.INFORMATION_MESSAGE);
+		} else if (e.getSource() == this.clearKnowledgeBaseButton) {
+			int result =
+			    JOptionPane.showConfirmDialog(this.mainFrame, "Do you really want to clear History Knowledge Base?", "Warning", JOptionPane.YES_NO_OPTION);
+			if (result == JOptionPane.YES_OPTION) {
+				HistoryKnowledgeBase.getInstance().clear();
+				JOptionPane.showMessageDialog(this.mainFrame, "History Knowledge Base was cleared successfully!", "History Knowledge Base cleared",
+				                JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 	}
 

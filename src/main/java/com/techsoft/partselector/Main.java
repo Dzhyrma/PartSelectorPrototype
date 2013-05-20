@@ -7,6 +7,7 @@ import com.techsoft.partselector.util.reflect.ClassCompiler;
 import com.techsoft.partselector.util.reflect.ClassGenerator;
 import com.techsoft.partselector.util.reflect.ClassReader;
 import com.techsoft.partselector.util.rules.RuleLibrary;
+import com.techsoft.partselector.util.rules.RuleModel;
 //import com.techsoft.partselector.util.rules.RuleModel;
 
 public class Main {
@@ -20,9 +21,9 @@ public class Main {
 		rule.setParameter("MaxOverlap", double.class);
 		rule.setParameter("WasherMinGap", double.class);
 		rule.setParameter("WasherMinOverlap", double.class);
-		rule.addClass(ClassReader.getInstance().loadClass("Washer"));
-		rule.addClass(ClassReader.getInstance().loadClass("Screw"));
-		rule.addClass(ClassReader.getInstance().loadClass("ScrewNut"));
+		rule.addClass("Washer");
+		rule.addClass("Screw");
+		rule.addClass("ScrewNut");
 		RuleLibrary.getInstance().addRule(rule);*/
 
 		RuleLibrary.getInstance();

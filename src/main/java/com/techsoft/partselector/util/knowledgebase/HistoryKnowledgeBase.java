@@ -78,4 +78,9 @@ public class HistoryKnowledgeBase implements Serializable {
 	public Map<HashVector, Integer> getFrequencyMap() {
 		return new HashMap<HashVector, Integer>(this.frequency);
 	}
+
+	public void clear() {
+		this.frequency = new HashMap<HashVector, Integer>();
+		saveLibrary();
+    }
 }

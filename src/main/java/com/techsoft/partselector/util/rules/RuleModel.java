@@ -14,7 +14,7 @@ public class RuleModel implements Serializable, Comparable<RuleModel> {
 
 	private String fileName;
 	private Map<String, Class<?>> inputParameters;
-	private Set<Class<?>> classes;
+	private Set<String> classes;
 
 	public List<String> getParameters() {
 		return new ArrayList<String>(this.inputParameters.keySet());
@@ -23,7 +23,7 @@ public class RuleModel implements Serializable, Comparable<RuleModel> {
 	public RuleModel(String fileName) {
 		this.fileName = fileName;
 		this.inputParameters = new HashMap<String, Class<?>>();
-		this.classes = new HashSet<Class<?>>();
+		this.classes = new HashSet<String>();
 	}
 
 	public Class<?> getParameter(String name) {
@@ -39,16 +39,16 @@ public class RuleModel implements Serializable, Comparable<RuleModel> {
 		this.inputParameters.remove(name);
 	}
 
-	public final void addClass(Class<?> clazz) {
-		this.classes.add(clazz);
+	public final void addClass(String className) {
+		this.classes.add(className);
 	}
 
-	public final void removeClass(Class<?> clazz) {
-		this.classes.remove(clazz);
+	public final void removeClass(String className) {
+		this.classes.remove(className);
 	}
 
-	public final Set<Class<?>> getClasses() {
-		return new HashSet<Class<?>>(this.classes);
+	public final Set<String> getClasses() {
+		return new HashSet<String>(this.classes);
 	}
 
 	public final String getFileName() {

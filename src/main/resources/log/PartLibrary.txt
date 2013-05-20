@@ -1,0 +1,8 @@
+May 20, 2013 3:44:56 AM com.techsoft.partselector.util.knowledgebase.PartLibrary getInstance
+WARNING: Serial Versions of UID in classes 'SixBorderedScrew' are different!
+May 20, 2013 3:44:56 AM com.techsoft.partselector.util.knowledgebase.PartLibrary getInstance
+INFO: New knowledge base was created!
+May 20, 2013 3:54:38 AM com.techsoft.partselector.util.knowledgebase.PartLibrary getInstance
+WARNING: Serial Versions of UID in classes 'SixBorderedScrew' are different!
+May 20, 2013 3:54:38 AM com.techsoft.partselector.util.knowledgebase.PartLibrary getInstance
+INFO: New knowledge base was created!

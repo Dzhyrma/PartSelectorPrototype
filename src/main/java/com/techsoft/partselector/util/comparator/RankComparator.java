@@ -16,8 +16,8 @@ public class RankComparator<T extends HashVector> implements Comparator<T> {
 
 	@Override
 	public int compare(T o1, T o2) {
-		Integer r1 = this.frequency.containsKey(o1) ? this.frequency.get(o1) : 0;
-		Integer r2 = this.frequency.containsKey(o2) ? this.frequency.get(o2) : 0;
+		Integer r1 = this.frequency.get(o1);
+		Integer r2 = this.frequency.get(o2);
 		r1 = r1 == null ? Integer.valueOf(0) : r1;
 		r2 = r2 == null ? Integer.valueOf(0) : r2;
 		return r2 - r1;

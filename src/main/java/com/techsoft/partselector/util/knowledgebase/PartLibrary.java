@@ -65,21 +65,28 @@ public class PartLibrary implements Serializable {
 	}
 
 	private void addPart(Class<?> clazz, Part part) {
-		if (clazz == null || part == null || (this.partNames.get(part.getName()) != null && this.partNames.get(part.getName()) != clazz))
+		if (clazz == null || part == null)
 			return;
-		this.partNames.put(part.getName(), clazz);
-		if (!this.parts.containsKey(clazz)) {
-			List<Part> list = new ArrayList<Part>();
-			list.add(part);
-			this.parts.put(clazz, list);
-		} else {
+		Class<?> oldClass = this.partNames.get(part.getName());
+		if (oldClass != null && this.parts.containsKey(oldClass)) {
+			List<Part> list = this.parts.get(oldClass);
+			int index = Collections.binarySearch(list, part, new PartComparator<Part>());
+			if (index >= 0)
+				list.remove(index);
+		}
+		if (this.parts.containsKey(clazz)) {
 			List<Part> list = this.parts.get(clazz);
 			int index = Collections.binarySearch(list, part, new PartComparator<Part>());
 			if (index < 0)
 				list.add(-index - 1, part);
 			else
 				list.set(index, part);
+		} else {
+			List<Part> list = new ArrayList<Part>();
+			list.add(part);
+			this.parts.put(clazz, list);
 		}
+		this.partNames.put(part.getName(), clazz);
 	}
 
 	public void addParts(Class<?> clazz, List<Part> parts) {

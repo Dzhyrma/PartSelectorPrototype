@@ -82,9 +82,9 @@ public class ClassGenerator {
 		long serialVersionUID = 0L;
 		long prime = 31L;
 		for (String key : this.declaredFields.keySet())
-			serialVersionUID += (long)this.declaredFields.get(key).getName().hashCode() + (long)prime * key.hashCode();
+			serialVersionUID += (long) this.declaredFields.get(key).getName().hashCode() + (long) prime * key.hashCode();
 		for (String key : this.fields.keySet()) {
-			serialVersionUID += (long)this.fields.get(key).getName().hashCode() + (long)prime * key.hashCode();
+			serialVersionUID += (long) this.fields.get(key).getName().hashCode() + (long) prime * key.hashCode();
 		}
 		fields.append(String.format(SERIAL_VERSION_UID_TEMPLATE, serialVersionUID));
 		serialVersionUID = serialVersionUID == 0L ? 1L : serialVersionUID;
@@ -141,7 +141,7 @@ public class ClassGenerator {
 		this.fields.put(fieldName, newFieldType);
 	}
 
-	public String[] getFieldNames() {
+	public String[] getAllFieldNames() {
 		synchronized (this) {
 			if (this.declaredFields == null)
 				return new String[0];
@@ -152,6 +152,24 @@ public class ClassGenerator {
 			for (String string : this.fields.keySet())
 				result[index++] = string;
 			return result;
+		}
+	}
+
+	public String[] getFieldNames() {
+		synchronized (this) {
+			String[] result = new String[this.fields.size()];
+			int index = 0;
+			for (String string : this.fields.keySet())
+				result[index++] = string;
+			return result;
+		}
+	}
+
+	public Class<?> getFieldType(String fieldName) {
+		synchronized (this) {
+			if (this.fields == null)
+				return null;
+			return this.fields.get(fieldName);
 		}
 	}
 }

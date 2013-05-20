@@ -29,7 +29,7 @@ public class MainFrame extends JFrame implements WindowListener {
 	public MainFrame() {
 		this.initFrame();
 
-		GroupLayout layout = new GroupLayout(getContentPane());
+		GroupLayout layout = new GroupLayout(this.getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setAutoCreateGaps(true);
 		layout.setAutoCreateContainerGaps(true);
@@ -37,9 +37,9 @@ public class MainFrame extends JFrame implements WindowListener {
 		this.libraryPanel = new LibraryPanel(this);
 		this.knowledgePanel = new KnowledgePanel(this);
 		this.ruleBasedSelector = new RuleBasedSelectorPanel(this);
-		JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, this.knowledgePanel, this.ruleBasedSelector);
+		JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, this.ruleBasedSelector, this.knowledgePanel);
 		splitPane.setOneTouchExpandable(true);
-		splitPane.setDividerLocation(500);
+		splitPane.setDividerLocation(300);
 		splitPane.setBorder(null);
 
 		layout.setHorizontalGroup(layout.createSequentialGroup().addComponent(this.libraryPanel).addComponent(splitPane));

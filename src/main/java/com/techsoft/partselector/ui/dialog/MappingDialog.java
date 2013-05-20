@@ -35,7 +35,8 @@ public class MappingDialog extends JDialog implements ActionListener {
 	 * controlling frame. The second Component argument should be null if you
 	 * want the dialog to come up with its left corner in the center of the
 	 * screen; otherwise, it should be the component on top of which the dialog
-	 * should appear. */
+	 * should appear. 
+	 * @param imageIcon */
 	public static Map<String, String> showDialog(Component locationComponent, String labelText, String title, String[] possibleClassValues,
 	                String[] possiblePartValues) {
 		Frame frame = JOptionPane.getFrameForComponent(locationComponent);
@@ -61,7 +62,7 @@ public class MappingDialog extends JDialog implements ActionListener {
 
 		this.possibleClassValues = possibleClassValues;
 		//Create and initialize the buttons.
-		JButton cancelButton = new JButton("Cancel");
+		final JButton cancelButton = new JButton("Cancel");
 		cancelButton.addActionListener(this);
 		//
 		final JButton setButton = new JButton("Set");
@@ -77,7 +78,6 @@ public class MappingDialog extends JDialog implements ActionListener {
 
 		//JLabel scheme = new JLabel(icon, SwingConstants.CENTER);
 		//comboBoxPane.add(scheme);
-		comboBoxPane.add(Box.createRigidArea(new Dimension(0, 100)));
 		this.comboBoxes = new ArrayList<JComboBox<String>>();
 		for (int i = 0; i < possibleClassValues.length; i++) {
 			JComboBox<String> comboBox = new JComboBox<String>(possiblePartValues);
@@ -104,19 +104,19 @@ public class MappingDialog extends JDialog implements ActionListener {
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
 		buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
-		buttonPane.add(Box.createHorizontalGlue());
-		buttonPane.add(cancelButton);
-		buttonPane.add(Box.createRigidArea(new Dimension(10, 0)));
+		buttonPane.add(Box.createHorizontalBox());
 		buttonPane.add(setButton);
+		buttonPane.add(Box.createRigidArea(new Dimension(10, 0)));
+		buttonPane.add(cancelButton);
 
 		//Put everything together, using the content pane's BorderLayout.
-		Container contentPane = getContentPane();
+		Container contentPane = this.getContentPane();
 		contentPane.add(comboBoxPane, BorderLayout.CENTER);
 		contentPane.add(buttonPane, BorderLayout.PAGE_END);
 
 		//Initialize values.
-		pack();
-		setLocationRelativeTo(locationComp);
+		this.pack();
+		this.setLocationRelativeTo(locationComp);
 	}
 
 	//Handle clicks on the Set and Cancel buttons.
