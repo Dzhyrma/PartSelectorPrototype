@@ -6,3 +6,11 @@ May 20, 2013 3:54:38 AM com.techsoft.partselector.util.knowledgebase.PartLibrary
 WARNING: Serial Versions of UID in classes 'SixBorderedScrew' are different!
 May 20, 2013 3:54:38 AM com.techsoft.partselector.util.knowledgebase.PartLibrary getInstance
 INFO: New knowledge base was created!
+May 20, 2013 7:03:33 PM com.techsoft.partselector.util.knowledgebase.PartLibrary getInstance
+WARNING: Serial Versions of UID in classes 'fggg' are different!
+May 20, 2013 7:03:33 PM com.techsoft.partselector.util.knowledgebase.PartLibrary getInstance
+INFO: New knowledge base was created!
+May 20, 2013 7:46:49 PM com.techsoft.partselector.util.knowledgebase.PartLibrary getInstance
+WARNING: Serial Versions of UID in classes 'NewClass' are different!
+May 20, 2013 7:46:49 PM com.techsoft.partselector.util.knowledgebase.PartLibrary getInstance
+INFO: New knowledge base was created!

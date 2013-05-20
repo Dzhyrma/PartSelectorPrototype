@@ -2,16 +2,19 @@ package com.techsoft.partselector;
 
 import java.util.Map;
 
+import com.techsoft.partselector.model.Part;
 import com.techsoft.partselector.ui.frame.MainFrame;
 import com.techsoft.partselector.util.reflect.ClassCompiler;
 import com.techsoft.partselector.util.reflect.ClassGenerator;
 import com.techsoft.partselector.util.reflect.ClassReader;
 import com.techsoft.partselector.util.rules.RuleLibrary;
 import com.techsoft.partselector.util.rules.RuleModel;
+
 //import com.techsoft.partselector.util.rules.RuleModel;
 
 public class Main {
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws ClassNotFoundException {
 		/*RuleModel rule = new RuleModel("ScrewExample.drl");
 		rule.setParameter("Dbore", double.class);
@@ -29,8 +32,11 @@ public class Main {
 		RuleLibrary.getInstance();
 		ClassCompiler.compileAllClasses();
 		Map<String, Class<?>> classesMap = ClassReader.getInstance().getClassMap();
-		for (String string : classesMap.keySet())
-			new ClassGenerator(classesMap.get(string)).saveClass();
+		for (String string : classesMap.keySet()) {
+			Class<?> clazz = classesMap.get(string);
+			if (Part.class.isAssignableFrom(clazz))
+				new ClassGenerator((Class<? extends Part>) clazz).saveClass();
+		}
 		MainFrame mainFrame = new MainFrame();
 		mainFrame.setVisible(true);
 	}

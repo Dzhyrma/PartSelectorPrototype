@@ -45,7 +45,7 @@ public class KnowledgePanel extends JPanel implements ActionListener, ListSelect
 
 	public KnowledgePanel(JFrame mainFrame) {
 		this.mainFrame = mainFrame;
-		this.fileChooser = new JFileChooser();
+		this.fileChooser = new JFileChooser(new File(System.getProperty("user.dir")));
 
 		GroupLayout layout = new GroupLayout(this);
 		this.setLayout(layout);

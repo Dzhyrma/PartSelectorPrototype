@@ -23,23 +23,18 @@ public class ClassGenerator {
 	private Map<String, Class<?>> declaredFields = new HashMap<String, Class<?>>();
 	private Map<String, Class<?>> fields = new HashMap<String, Class<?>>();
 	private String name;
-	private Class<?> superClass = Part.class;
 
-	public ClassGenerator(Class<?> someClass) {
-		if (someClass == null)
+	private Class<? extends Part> superClass = Part.class;
+
+	@SuppressWarnings("unchecked")
+	public ClassGenerator(Class<? extends Part> someClass) {
+		if (someClass == null || someClass == Part.class)
 			return;
 		this.name = someClass.getName();
-		this.superClass = someClass.getSuperclass();
+		this.setSuperClass((Class<? extends Part>) someClass.getSuperclass());
 		for (Field field : someClass.getDeclaredFields())
 			if (field.getModifiers() == Modifier.PUBLIC)
 				this.fields.put(field.getName(), field.getType());
-		Class<?> superClass = this.superClass;
-		while (superClass != null) {
-			for (Field field : superClass.getDeclaredFields())
-				if (field.getModifiers() == Modifier.PUBLIC)
-					this.declaredFields.put(field.getName(), field.getType());
-			superClass = superClass.getSuperclass();
-		}
 	}
 
 	public ClassGenerator(String name) {
@@ -47,7 +42,7 @@ public class ClassGenerator {
 	}
 
 	public void addField(String fieldName, Class<?> fieldType) {
-		if (isFieldExists(fieldName)) {
+		if (this.isFieldExists(fieldName)) {
 			System.err.println("Field with this name already exists.");
 			return;
 		}
@@ -56,6 +51,10 @@ public class ClassGenerator {
 
 	public final String getName() {
 		return this.name;
+	}
+
+	public final void setName(String name) {
+		this.name = name;
 	}
 
 	public final Class<?> getSuperClass() {
@@ -118,14 +117,23 @@ public class ClassGenerator {
 		}
 	}
 
-	public final void setName(String name) {
-		this.name = name;
-	}
-
 	public final void setSuperClass(Class<? extends Part> superClass) {
 		if (superClass == null)
 			this.superClass = Part.class;
-		this.superClass = superClass;
+		else
+			this.superClass = superClass;
+		Class<?> clazz = this.superClass;
+		this.declaredFields = new HashMap<String, Class<?>>();
+		while (clazz != null) {
+			for (Field field : clazz.getDeclaredFields())
+				if (field.getModifiers() == Modifier.PUBLIC)
+					this.declaredFields.put(field.getName(), field.getType());
+			clazz = clazz.getSuperclass();
+		}
+
+		for (Object string : this.fields.keySet().toArray())
+			if (this.declaredFields.containsKey(string))
+				this.fields.remove(string);
 	}
 
 	public void updateFieldName(String oldFieldName, String newFieldName) {

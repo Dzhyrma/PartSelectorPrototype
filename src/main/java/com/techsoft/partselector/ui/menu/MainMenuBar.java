@@ -34,7 +34,7 @@ public class MainMenuBar extends JMenuBar {
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				JOptionPane.showMessageDialog(null, "This program is a prototype written for TechSoft(c) company by Andrii Dzhyrma", "About", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(MainMenuBar.this.getParent(), "This program is a prototype written for TechSoft(c) company by Andrii Dzhyrma", "About", JOptionPane.PLAIN_MESSAGE);
 			}
 			
 			@Override

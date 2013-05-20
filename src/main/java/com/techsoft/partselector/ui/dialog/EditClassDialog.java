@@ -62,10 +62,10 @@ public class EditClassDialog extends JDialog implements ActionListener {
 		}
 
 		@Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 			this.row = row;
-	        return this.deleteButton;
-        }
+			return this.deleteButton;
+		}
 	}
 
 	private class MyTableModel extends AbstractTableModel {
@@ -119,10 +119,15 @@ public class EditClassDialog extends JDialog implements ActionListener {
 				EditClassDialog.this.classGenerator.updateFieldType(EditClassDialog.this.classGenerator.getFieldNames()[row], (Class<?>) value);
 			}
 			if (col == 0 && value != null && !EditClassDialog.this.classGenerator.getFieldNames()[row].equals(value)) {
-				if (EditClassDialog.this.classGenerator.isFieldExists(value.toString()))
-					JOptionPane.showMessageDialog(EditClassDialog.this, "Field with this name already exists", "Warning", JOptionPane.WARNING_MESSAGE);
+				String string = value.toString();
+				if (EditClassDialog.this.classGenerator.isFieldExists(string))
+					JOptionPane.showMessageDialog(EditClassDialog.this, "Field with this name already exists.", "Warning", JOptionPane.WARNING_MESSAGE);
+				else if (string.length() == 0)
+					JOptionPane.showMessageDialog(EditClassDialog.this, "Field name should not be empty.", "Warning", JOptionPane.WARNING_MESSAGE);
+				else if (!string.matches("^[a-z][a-zA-Z0-9]*?$"))
+					JOptionPane.showMessageDialog(EditClassDialog.this, "Field name is not correct.", "Warning", JOptionPane.WARNING_MESSAGE);
 				else
-					EditClassDialog.this.classGenerator.updateFieldName(EditClassDialog.this.classGenerator.getFieldNames()[row], value.toString());
+					EditClassDialog.this.classGenerator.updateFieldName(EditClassDialog.this.classGenerator.getFieldNames()[row], string);
 			}
 			this.fireTableDataChanged();
 		}
@@ -138,12 +143,12 @@ public class EditClassDialog extends JDialog implements ActionListener {
 		dialog.setVisible(true);
 	}
 
-	public static void showDialog(Component locationComponent, Class<?> clazz) {
+	/*public static void showDialog(Component locationComponent, Class<?> clazz) {
 		Frame frame = JOptionPane.getFrameForComponent(locationComponent);
 		dialog = new EditClassDialog(frame, clazz);
 		dialog.setLocationRelativeTo(locationComponent);
 		dialog.setVisible(true);
-	}
+	}*/
 
 	private JButton acceptButton, cancelButton, addFieldButton;
 	private JComboBox<Class<? extends Part>> classExtendsComboBox;
@@ -152,12 +157,12 @@ public class EditClassDialog extends JDialog implements ActionListener {
 	private MyTableModel fieldsData;
 	private JTable fieldsTable;
 
-	private EditClassDialog(Frame frame, Class<?> clazz) {
+	/*private EditClassDialog(Frame frame, Class<?> clazz) {
 		super(frame, "Edit Class", true);
 		this.classGenerator = new ClassGenerator(clazz);
 
 		this.initFrame();
-	}
+	}*/
 
 	public EditClassDialog(Frame frame) {
 		super(frame, "New Class", true);
@@ -173,6 +178,8 @@ public class EditClassDialog extends JDialog implements ActionListener {
 		this.getContentPane().setLayout(layout);
 		layout.setAutoCreateGaps(true);
 		layout.setAutoCreateContainerGaps(true);
+
+		this.setMinimumSize(new Dimension(500, 300));
 
 		this.classNameTextField = new JTextField(this.classGenerator.getName());
 		//this.classNameTextField.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Class name"));
@@ -220,9 +227,10 @@ public class EditClassDialog extends JDialog implements ActionListener {
 		JLabel extendsLabel = new JLabel("Extends:");
 
 		layout.setHorizontalGroup(layout.createParallelGroup(Alignment.CENTER).addGroup(
-		                layout.createSequentialGroup().addComponent(classNameLabel).addComponent(this.classNameTextField)).addGroup(
-		                layout.createSequentialGroup().addComponent(extendsLabel).addComponent(this.classExtendsComboBox)).addComponent(scrollPane).addGroup(
-		                layout.createSequentialGroup().addComponent(this.acceptButton).addComponent(this.cancelButton)).addComponent(this.addFieldButton));
+		                layout.createSequentialGroup().addGroup(layout.createParallelGroup().addComponent(classNameLabel).addComponent(extendsLabel)).addGroup(
+		                                layout.createParallelGroup().addComponent(this.classNameTextField).addComponent(this.classExtendsComboBox)))
+		                .addComponent(scrollPane).addGroup(layout.createSequentialGroup().addComponent(this.acceptButton).addComponent(this.cancelButton))
+		                .addComponent(this.addFieldButton));
 		layout.linkSize(SwingConstants.VERTICAL, this.acceptButton, this.cancelButton, this.classNameTextField, this.classExtendsComboBox, classNameLabel,
 		                extendsLabel);
 		layout.setVerticalGroup(layout.createSequentialGroup().addGroup(
@@ -240,11 +248,11 @@ public class EditClassDialog extends JDialog implements ActionListener {
 			String[] classNames = ClassReader.getInstance().getClassNames();
 			for (String string : classNames)
 				if (className.compareToIgnoreCase(string) == 0) {
-					JOptionPane.showMessageDialog(this, "Class with this name already exists", "Warning", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(this, "Class with this name already exists.", "Warning", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 			if (!className.matches("[a-zA-Z_$][a-zA-Z\\d_$]*"))
-				JOptionPane.showMessageDialog(this, "Not correct class name", "Warning", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Class name is not correct.", "Warning", JOptionPane.WARNING_MESSAGE);
 			else {
 				this.classGenerator.setName(this.classNameTextField.getText());
 				this.classGenerator.saveClass();
@@ -252,10 +260,11 @@ public class EditClassDialog extends JDialog implements ActionListener {
 			}
 		} else if (e.getSource() == this.classExtendsComboBox) {
 			this.classGenerator.setSuperClass(this.classExtendsComboBox.getItemAt(this.classExtendsComboBox.getSelectedIndex()));
+			this.fieldsTable.repaint();
 		} else if (e.getSource() == this.cancelButton) {
 			EditClassDialog.dialog.setVisible(false);
 		} else if (e.getSource() == this.addFieldButton) {
-			String fieldName = "NewField";
+			String fieldName = "newField";
 			if (this.classGenerator.isFieldExists(fieldName)) {
 				int index = 1;
 				String newFieldName = fieldName + index;

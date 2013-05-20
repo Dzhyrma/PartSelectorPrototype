@@ -46,7 +46,7 @@ public class LibraryPanel extends JPanel implements ActionListener, ListSelectio
 
 	public LibraryPanel(JFrame mainFrame) {
 		this.mainFrame = mainFrame;
-		this.fileChooser = new JFileChooser();
+		this.fileChooser = new JFileChooser(new File(System.getProperty("user.dir")));
 
 		GroupLayout layout = new GroupLayout(this);
 		this.setLayout(layout);
@@ -126,7 +126,13 @@ public class LibraryPanel extends JPanel implements ActionListener, ListSelectio
 				String className = this.classList.getSelectedValue().toString();
 				try {
 					Class<?> clazz = ClassReader.getInstance().loadClass(className);
-					ClassGenerator classGenerator = new ClassGenerator(clazz);
+					if (!Part.class.isAssignableFrom(clazz)) {
+						JOptionPane.showConfirmDialog(this.mainFrame,
+						                "The class you have selected does not extend main Part class. We advice you to delete current class.",
+						                "Class inheritance", JOptionPane.INFORMATION_MESSAGE);
+						return;
+					}
+					ClassGenerator classGenerator = new ClassGenerator((Class<? extends Part>) clazz);
 					String[] classFieldNames = classGenerator.getAllFieldNames();
 					PartReader partReader = new PartReader();
 					partReader.loadInstances(file);
@@ -159,8 +165,8 @@ public class LibraryPanel extends JPanel implements ActionListener, ListSelectio
 		} else if (e.getSource() == this.deleteClassButton) {
 			int result =
 			    JOptionPane.showConfirmDialog(this.mainFrame,
-			                    "This operation will delete also inherited classes and parts in the library.\nAre you sure you want to delete this class?", "Class deleting",
-			                    JOptionPane.YES_NO_OPTION);
+			                    "This operation will delete also inherited classes and parts in the library.\nAre you sure you want to delete this class?",
+			                    "Class deleting", JOptionPane.YES_NO_OPTION);
 			if (result == JOptionPane.YES_OPTION) {
 				if (!FileRemover.removeClass(this.classList.getSelectedValue().toString())) {
 					JOptionPane.showMessageDialog(this.mainFrame, "Some files are read only.", "Delete warning", JOptionPane.WARNING_MESSAGE);

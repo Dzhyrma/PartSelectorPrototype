@@ -35,7 +35,8 @@ public class MappingDialog extends JDialog implements ActionListener {
 	 * controlling frame. The second Component argument should be null if you
 	 * want the dialog to come up with its left corner in the center of the
 	 * screen; otherwise, it should be the component on top of which the dialog
-	 * should appear. 
+	 * should appear.
+	 * 
 	 * @param imageIcon */
 	public static Map<String, String> showDialog(Component locationComponent, String labelText, String title, String[] possibleClassValues,
 	                String[] possiblePartValues) {
@@ -82,7 +83,7 @@ public class MappingDialog extends JDialog implements ActionListener {
 		for (int i = 0; i < possibleClassValues.length; i++) {
 			JComboBox<String> comboBox = new JComboBox<String>(possiblePartValues);
 			int selectedIndex = Arrays.binarySearch(possiblePartValues, possibleClassValues[i]);
-			comboBox.setSelectedIndex(selectedIndex < 0 ? -selectedIndex - 2 : selectedIndex);
+			comboBox.setSelectedIndex(selectedIndex < 0 ? (selectedIndex == -1 ? 0 : -selectedIndex - 2) : selectedIndex);
 			this.comboBoxes.add(comboBox);
 			//listScroller.setPreferredSize(new Dimension(250, 80));
 			comboBox.setAlignmentX(LEFT_ALIGNMENT);
