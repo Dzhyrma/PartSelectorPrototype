@@ -18,12 +18,28 @@ import com.techsoft.partselector.ui.panel.KnowledgePanel;
 import com.techsoft.partselector.ui.panel.LibraryPanel;
 import com.techsoft.partselector.ui.panel.RuleBasedSelectorPanel;
 
+/**
+ * @author    Andrii Dzhyrma
+ * @uml.dependency   supplier="com.techsoft.partselector.ui.menu.MainMenuBar"
+ */
 public class MainFrame extends JFrame implements WindowListener {
 
 	private static final long serialVersionUID = 8073600424665819047L;
 
+	/**
+     * @uml.property  name="libraryPanel"
+     * @uml.associationEnd  
+     */
 	private LibraryPanel libraryPanel;
+	/**
+     * @uml.property  name="knowledgePanel"
+     * @uml.associationEnd  
+     */
 	private KnowledgePanel knowledgePanel;
+	/**
+     * @uml.property  name="ruleBasedSelector"
+     * @uml.associationEnd  
+     */
 	private RuleBasedSelectorPanel ruleBasedSelector;
 
 	public MainFrame() {

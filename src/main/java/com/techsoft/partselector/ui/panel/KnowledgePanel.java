@@ -31,14 +31,29 @@ import com.techsoft.partselector.util.io.ExtensionFileFilter;
 import com.techsoft.partselector.util.knowledgebase.HistoryKnowledgeBase;
 import com.techsoft.partselector.util.knowledgebase.KnowledgeBaseExtractor;
 
+/**
+ * @author  Andrii Dzhyrma 
+ */
 public class KnowledgePanel extends JPanel implements ActionListener, ListSelectionListener {
 
 	private static final long serialVersionUID = 4107476292153220384L;
 
-	private JButton loadNewAssemblyButton, fireExtractingRuleButton, addResultButton, clearKnowledgeBaseButton;
+	private JButton loadNewAssemblyButton;
+
+	private JButton fireExtractingRuleButton;
+
+	private JButton addResultButton;
+
+	private JButton clearKnowledgeBaseButton;
 	private final JFrame mainFrame;
 	private JFileChooser fileChooser;
-	private JTextArea assemblyTextArea, resultTextArea;
+	private JTextArea assemblyTextArea;
+
+	private JTextArea resultTextArea;
+	/**
+     * @uml.property  name="assembly"
+     * @uml.associationEnd  
+     */
 	private Assembly assembly;
 	private JComboBox<String> ruleComboBox;
 	private Map<HashVector, Integer> fireResultMap;

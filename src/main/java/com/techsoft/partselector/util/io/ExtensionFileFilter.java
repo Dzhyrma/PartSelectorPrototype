@@ -4,10 +4,15 @@ import java.io.File;
 
 import javax.swing.filechooser.FileFilter;
 
+/** FileFilter for the UI dialogs.
+ * 
+ * @author Andrii Dzhyrma */
 public class ExtensionFileFilter extends FileFilter {
-	
-	private String extension, description;
-	
+
+	private String extension;
+	/** @uml.property name="description" */
+	private String description;
+
 	public ExtensionFileFilter(String extension, String description) {
 		this.extension = extension;
 		this.description = extension;
@@ -24,6 +29,8 @@ public class ExtensionFileFilter extends FileFilter {
 		return ext;
 	}
 
+	/** @return
+	 * @uml.property name="description" */
 	@Override
 	public String getDescription() {
 		return this.description;

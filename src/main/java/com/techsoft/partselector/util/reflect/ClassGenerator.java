@@ -10,6 +10,9 @@ import java.util.Map;
 import com.techsoft.partselector.consts.Paths;
 import com.techsoft.partselector.model.Part;
 
+/** Class generator. Creates *.java files for the types created in runtime.
+ * 
+ * @author Andrii Dzhyrma */
 public class ClassGenerator {
 	private static final String CLASS_TEMPLATE = "public class %s {%n%s}";
 	//private static final String DEFAULT_CONSTRUCTOR_TEMPLATE = "\tpublic String name;%n%n\tpublic %s(String name) {%n\t\tthis.name = name;%n\t}%n%n";
@@ -22,10 +25,15 @@ public class ClassGenerator {
 
 	private Map<String, Class<?>> declaredFields = new HashMap<String, Class<?>>();
 	private Map<String, Class<?>> fields = new HashMap<String, Class<?>>();
+	/** @uml.property name="name" */
 	private String name;
 
+	/** @uml.property name="superClass" */
 	private Class<? extends Part> superClass = Part.class;
 
+	/** Creates a class generator instance based on the given class.
+	 * 
+	 * @param someClass - class to copy information from. */
 	@SuppressWarnings("unchecked")
 	public ClassGenerator(Class<? extends Part> someClass) {
 		if (someClass == null || someClass == Part.class)
@@ -37,10 +45,17 @@ public class ClassGenerator {
 				this.fields.put(field.getName(), field.getType());
 	}
 
+	/** Creates a new class generator instance with the give name.
+	 * 
+	 * @param name - name of the class. */
 	public ClassGenerator(String name) {
 		this.name = name;
 	}
 
+	/** Adds a field to the current class.
+	 * 
+	 * @param fieldName - name of the field.
+	 * @param fieldType - type of the field. */
 	public void addField(String fieldName, Class<?> fieldType) {
 		if (this.isFieldExists(fieldName)) {
 			System.err.println("Field with this name already exists.");
@@ -49,30 +64,46 @@ public class ClassGenerator {
 		this.fields.put(fieldName, fieldType);
 	}
 
+	/** @return name of the class.
+	 * @uml.property name="name" */
 	public final String getName() {
 		return this.name;
 	}
 
+	/** Sets a new name for the current class.
+	 * 
+	 * @param name - new name for the current class.
+	 * @uml.property name="name" */
 	public final void setName(String name) {
 		this.name = name;
 	}
 
+	/** @return the super class of the current class.
+	 * @uml.property name="superClass" */
 	public final Class<?> getSuperClass() {
 		return this.superClass;
 	}
 
+	/** Checks whether the field with the given name exists.
+	 * 
+	 * @param fieldName - name of the field to be checked.
+	 * @return true, if the field exists. False, otherwise. */
 	public boolean isFieldExists(String fieldName) {
 		if (fieldName.equals(NAME_STRING) || this.declaredFields.containsKey(fieldName) || this.fields.containsKey(fieldName))
 			return true;
 		return false;
 	}
 
+	/** Removes the field from the current class.
+	 * 
+	 * @param fieldName - name of the field to be removed. */
 	public void removeField(String fieldName) {
 		if (!this.fields.containsKey(fieldName))
 			return;
 		this.fields.remove(fieldName);
 	}
 
+	/** Saves generated class to the file. */
 	public void saveClass() {
 		StringBuilder fields = new StringBuilder();
 		StringBuilder getters = new StringBuilder();
@@ -117,6 +148,10 @@ public class ClassGenerator {
 		}
 	}
 
+	/** Sets a super class for the current class.
+	 * 
+	 * @param superClass - the super class.
+	 * @uml.property name="superClass" */
 	public final void setSuperClass(Class<? extends Part> superClass) {
 		if (superClass == null)
 			this.superClass = Part.class;
@@ -136,6 +171,10 @@ public class ClassGenerator {
 				this.fields.remove(string);
 	}
 
+	/** Changes the name of the field.
+	 * 
+	 * @param oldFieldName - old name of the field.
+	 * @param newFieldName - new name of the field. */
 	public void updateFieldName(String oldFieldName, String newFieldName) {
 		if (oldFieldName.equals(NAME_STRING) || isFieldExists(newFieldName) || !this.fields.containsKey(oldFieldName))
 			return;
@@ -143,12 +182,17 @@ public class ClassGenerator {
 		this.fields.remove(oldFieldName);
 	}
 
+	/** Changes the type of field.
+	 * 
+	 * @param fieldName - name of the field to be changed.
+	 * @param newFieldType - new type of the field. */
 	public void updateFieldType(String fieldName, Class<?> newFieldType) {
 		if (fieldName.equals(NAME_STRING) || !this.fields.containsKey(fieldName))
 			return;
 		this.fields.put(fieldName, newFieldType);
 	}
 
+	/** @return array with all field names. */
 	public String[] getAllFieldNames() {
 		synchronized (this) {
 			if (this.declaredFields == null)
@@ -163,6 +207,7 @@ public class ClassGenerator {
 		}
 	}
 
+	/** @return array with field names except fields from the super classes. */
 	public String[] getFieldNames() {
 		synchronized (this) {
 			String[] result = new String[this.fields.size()];
@@ -173,6 +218,11 @@ public class ClassGenerator {
 		}
 	}
 
+	/** Gets a type of the field with the given name.
+	 * 
+	 * @param fieldName - name of the field.
+	 * @return type of the field. Null, if the field with the given does not
+	 *         exist. */
 	public Class<?> getFieldType(String fieldName) {
 		synchronized (this) {
 			if (this.fields == null)

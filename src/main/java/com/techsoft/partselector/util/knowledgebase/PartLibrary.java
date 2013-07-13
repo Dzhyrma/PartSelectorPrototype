@@ -20,10 +20,15 @@ import com.techsoft.partselector.util.SimpleLogger;
 import com.techsoft.partselector.util.io.ReflectObjectInputStream;
 import com.techsoft.partselector.util.comparator.PartComparator;
 
+/** Represents the library of parts.
+ * 
+ * @author Andrii Dzhyrma */
 public class PartLibrary implements Serializable {
 
 	private static final long serialVersionUID = -6131079720244059106L;
 	private static final Logger LOGGER = SimpleLogger.getLogger(PartLibrary.class);
+	/** @uml.property name="instance"
+	 * @uml.associationEnd */
 	private static volatile PartLibrary instance;
 
 	private Map<Class<?>, List<Part>> parts;
@@ -46,6 +51,8 @@ public class PartLibrary implements Serializable {
 		}
 	}
 
+	/** @return the instance of current singleton class.
+	 * @uml.property name="instance" */
 	public synchronized static PartLibrary getInstance() {
 		if (instance == null) {
 			try {
@@ -64,6 +71,10 @@ public class PartLibrary implements Serializable {
 		return instance;
 	}
 
+	/** Adds part to the library.
+	 * 
+	 * @param clazz - class of the part to be added.
+	 * @param part - part to be added. */
 	private void addPart(Class<?> clazz, Part part) {
 		if (clazz == null || part == null)
 			return;
@@ -89,6 +100,10 @@ public class PartLibrary implements Serializable {
 		this.partNames.put(part.getName(), clazz);
 	}
 
+	/** Adds parts to the library.
+	 * 
+	 * @param clazz - class of the parts to be added.
+	 * @param parts - list of the parts to be added. */
 	public void addParts(Class<?> clazz, List<Part> parts) {
 		if (parts == null)
 			return;
@@ -97,6 +112,10 @@ public class PartLibrary implements Serializable {
 		saveLibrary();
 	}
 
+	/** Removes parts from the library.
+	 * 
+	 * @param clazz - class of the parts to be removed.
+	 * @param parts - parts to be removed. */
 	public void removeParts(Class<?> clazz, List<Part> parts) {
 		if (clazz == null || parts == null)
 			return;
@@ -115,6 +134,10 @@ public class PartLibrary implements Serializable {
 		saveLibrary();
 	}
 
+	/** Gets parts for specific class.
+	 * 
+	 * @param clazz - class of the parts to be returned.
+	 * @return array of the parts. */
 	public Part[] getParts(Class<?> clazz) {
 		if (!this.parts.containsKey(clazz))
 			return new Part[0];
@@ -128,6 +151,9 @@ public class PartLibrary implements Serializable {
 		return result;
 	}
 
+	/** Removes the bunch of parts of the specific type.
+	 * 
+	 * @param clazz - type of the parts to remove. */
 	public void removeClass(Class<?> clazz) {
 		List<Part> removedList = this.parts.remove(clazz);
 		if (removedList != null)
@@ -137,6 +163,11 @@ public class PartLibrary implements Serializable {
 		saveLibrary();
 	}
 
+	/** Gets parts using the name of it.
+	 * 
+	 * @param partName - name of the part to be returned.
+	 * @return instance of the part with the given name. Null, if part was not
+	 *         found. */
 	public Part getPart(String partName) {
 		List<Part> parts = this.parts.get(this.partNames.get(partName));
 		if (parts == null)

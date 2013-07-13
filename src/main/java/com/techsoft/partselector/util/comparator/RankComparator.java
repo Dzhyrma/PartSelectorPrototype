@@ -6,11 +6,20 @@ import java.util.Map;
 
 import com.techsoft.partselector.model.HashVector;
 
+/** Comparator for combinations. Used to sort them by frequency.
+ * 
+ * @param <T>
+ * 
+ * @author Andrii Dzhyrma */
 public class RankComparator<T extends HashVector> implements Comparator<T> {
 
 	private Map<T, Integer> frequency;
-	
-	public RankComparator (Map<T, Integer> frequency) {
+
+	/** Initializes the comparator with the given frequency map for each
+	 * combination.
+	 * 
+	 * @param frequency */
+	public RankComparator(Map<T, Integer> frequency) {
 		this.frequency = new HashMap<T, Integer>(frequency);
 	}
 

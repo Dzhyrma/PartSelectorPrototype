@@ -82,5 +82,5 @@ rule "Geometrical Rule"
 		result.addPart($screwNut);
 		result.addPart($washer);
 		RuleResult.getInstance().addResult(result);
-		System.out.println( "Screw: " + $screw.getName() + ", ScrewNut: " + $screwNut.getName() + ", Washer: " + $washer.getName());
+		//System.out.println( "Screw: " + $screw.getName() + ", ScrewNut: " + $screwNut.getName() + ", Washer: " + $washer.getName());
 end

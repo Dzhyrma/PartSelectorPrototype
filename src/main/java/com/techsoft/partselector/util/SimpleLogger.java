@@ -9,6 +9,9 @@ import java.util.logging.SimpleFormatter;
 
 import com.techsoft.partselector.consts.Paths;
 
+/** Class for making logs.
+ * 
+ * @author Andrii Dzhyrma */
 public class SimpleLogger {
 
 	public static Logger getLogger(Class<?> clazz) {

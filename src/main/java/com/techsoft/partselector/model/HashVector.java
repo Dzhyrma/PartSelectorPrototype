@@ -5,28 +5,38 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
 
+/** Represents combination of parts (e.g., Screw, ScrewNut and Washer).
+ * 
+ * @author Andrii Dzhyrma */
 public class HashVector implements Serializable {
 
 	private static final long serialVersionUID = -285110250839741151L;
 
+	// Prime number that is used to generate a hashcode.
 	private int prime = 31;
 	private int hashCode = 31;
-	private Vector<Part> parts;
+	/** Vector of parts in the current combination.
+	 * 
+	 * @uml.property name="parts"
+	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true"
+	 *                     inverse="hashVector:com.techsoft.partselector.model.Part" */
+	private Vector<Part> parts = new Vector<Part>();
 
-	public HashVector() {
-		this.parts = new Vector<>();
-	}
-
+	/** Adds new part to the current combination and recalculates the hashcode.
+	 * 
+	 * @param part - part to be added. */
 	public void addPart(Part part) {
 		if (part == null)
 			return;
 		this.parts.add(part);
+		// sort the current collection of parts by name.
 		Collections.sort(this.parts, new Comparator<Part>() {
 			@Override
 			public int compare(Part o1, Part o2) {
 				return ((Part) o1).getName().compareTo(((Part) o2).getName());
 			}
 		});
+		// generate a hashcode for the sorted collection and store it in the field for future lookups
 		this.hashCode = 1;
 		for (Part element : this.parts) {
 			this.hashCode = this.hashCode * this.prime + element.getName().hashCode();

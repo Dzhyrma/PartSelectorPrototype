@@ -9,7 +9,7 @@ import com.techsoft.partselector.util.rules.AuxiliaryMethods;
 import com.techsoft.partselector.model.HashVector;
 import com.techsoft.partselector.model.Part;
 
-rule "A stand alone rule"
+rule "Extracting rule"
 	when
 		InputParameters( $params : parameters,
 						 parameters["Screw"] != null,
@@ -40,7 +40,6 @@ rule "A stand alone rule"
 		result.addPart($part2);
 		result.addPart($part3);
 		RuleResult.getInstance().addResult(result);
-		System.out.println( "Screw: " + $part1.getName() + ", ScrewNut: " + $part2.getName() + ", Washer: " + $part3.getName());
-
+		//System.out.println( "Screw: " + $part1.getName() + ", ScrewNut: " + $part2.getName() + ", Washer: " + $part3.getName());
 end
 

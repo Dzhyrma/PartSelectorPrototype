@@ -13,8 +13,14 @@ import java.util.Vector;
 
 import com.techsoft.partselector.model.Part;
 
+/** Reads parts from the files using mapping technique.
+ * 
+ * @author Andrii Dzhyrma */
 public class PartReader {
+	/** @uml.property name="parts"
+	 * @uml.associationEnd multiplicity="(0 -1)" */
 	private Part[] parts;
+	/** @uml.property name="names" */
 	private String[] names;
 	private HashMap<String, Integer> indexMap;
 	private Vector<String[]> instances;
@@ -37,6 +43,13 @@ public class PartReader {
 		return value;
 	}
 
+	/** Converts instances read from the file to the objects of the given class
+	 * using attribute map.
+	 * 
+	 * @param clazz - class convert instances to.
+	 * @param attributeMap - map of the attribute names (name in the file ->
+	 *            name in the object)
+	 * @return true, if conversion was successful. */
 	public boolean convertToObjects(Class<? extends Part> clazz, Map<String, String> attributeMap) {
 		if (this.instances == null || this.names == null || this.indexMap == null)
 			return false;
@@ -75,6 +88,10 @@ public class PartReader {
 		return true;
 	}
 
+	/** Loads instances to the current object (rows in the file)
+	 * 
+	 * @param fileName - name of the file with information about parts.
+	 * @return true, if instances were read successfully. */
 	public boolean loadInstances(String fileName) {
 		if (fileName == null)
 			return false;
@@ -84,6 +101,10 @@ public class PartReader {
 		return loadInstances(file);
 	}
 
+	/** Loads instances to the current object (rows in the file)
+	 * 
+	 * @param file - file with information about parts.
+	 * @return true, if instances were read successfully. */
 	@SuppressWarnings("resource")
 	public boolean loadInstances(File file) {
 		try {
@@ -121,6 +142,10 @@ public class PartReader {
 		}
 	}
 
+	/** Gets the list of converted instances to objects.
+	 * 
+	 * @return
+	 * @uml.property name="parts" */
 	public List<Part> getParts() {
 		List<Part> result = new ArrayList<Part>();
 		if (this.parts == null)
@@ -130,6 +155,8 @@ public class PartReader {
 		return result;
 	}
 
+	/** @return
+	 * @uml.property name="names" */
 	public String[] getNames() {
 		return Arrays.copyOf(this.names, this.names.length);
 	}

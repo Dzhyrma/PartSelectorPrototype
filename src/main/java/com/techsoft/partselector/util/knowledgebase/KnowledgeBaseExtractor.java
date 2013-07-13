@@ -18,6 +18,9 @@ import com.techsoft.partselector.util.reflect.ClassReader;
 import com.techsoft.partselector.util.rules.InputParameters;
 import com.techsoft.partselector.util.rules.RuleResult;
 
+/** Class that extracts useful combinations from the assembly files using rules.
+ * 
+ * @author Andrii Dzhyrma */
 public class KnowledgeBaseExtractor {
 	private KnowledgeBase knowledgeBase;
 
@@ -54,6 +57,11 @@ public class KnowledgeBaseExtractor {
 			traverseAssembly(item, inputParameters);
 	}
 
+	/** Returns the frequency map of the extracted combinations.
+	 * 
+	 * @param assembly - assembly to read information from.
+	 * @param ruleName - name of the rule to be applied.
+	 * @return the frequency map. Null, if something went wrong. */
 	public HashMap<HashVector, Integer> extractKnowledge(Assembly assembly, String ruleName) {
 		if (assembly == null || ruleName == null)
 			return null;

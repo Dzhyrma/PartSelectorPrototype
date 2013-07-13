@@ -19,6 +19,9 @@ import com.techsoft.partselector.consts.Paths;
 
 import static java.nio.file.StandardCopyOption.*;
 
+/** Class for compiling all the runtime classes created for parts.
+ * 
+ * @author Andrii Dzhyrma */
 public class ClassCompiler {
 	public static boolean compileAllClasses() {
 		File dir = new File(Paths.JAVA_PATH);

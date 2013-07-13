@@ -15,12 +15,18 @@ import com.techsoft.partselector.consts.Paths;
 import com.techsoft.partselector.util.SimpleLogger;
 import com.techsoft.partselector.util.io.ReflectObjectInputStream;
 
+/** Class that controls all rules and stores them in the library.
+ * 
+ * @author Andrii Dzhyrma */
 public class RuleLibrary implements Serializable {
 
 	private static final long serialVersionUID = -4999339379220861937L;
 	private static final Logger LOGGER = SimpleLogger.getLogger(RuleLibrary.class);
+	/** @uml.property name="instance"
+	 * @uml.associationEnd */
 	private static volatile RuleLibrary instance;
 
+	/** @uml.property name="rules" */
 	private PriorityQueue<RuleModel> rules;
 
 	private RuleLibrary() {
@@ -39,6 +45,8 @@ public class RuleLibrary implements Serializable {
 		}
 	}
 
+	/** @return the instance of current singleton class.
+	 * @uml.property name="instance" */
 	public static synchronized RuleLibrary getInstance() {
 		if (instance == null) {
 			try {
@@ -57,6 +65,9 @@ public class RuleLibrary implements Serializable {
 		return instance;
 	}
 
+	/** Adds new rule to the library.
+	 * 
+	 * @param rule - rule to be added. */
 	public void addRule(RuleModel rule) {
 		if (rule != null) {
 			this.rules.remove(rule);
@@ -65,6 +76,8 @@ public class RuleLibrary implements Serializable {
 		}
 	}
 
+	/** @return all rules in the library.
+	 * @uml.property name="rules" */
 	public Vector<RuleModel> getRules() {
 		return new Vector<RuleModel>(this.rules);
 	}

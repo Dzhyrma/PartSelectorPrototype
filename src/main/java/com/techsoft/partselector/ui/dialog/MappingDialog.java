@@ -23,8 +23,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+/**
+ * @author  Andrii Dzhyrma 
+ */
 public class MappingDialog extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 3737483740105218627L;
+	/**
+     * @uml.property  name="dialog"
+     * @uml.associationEnd  
+     */
 	private static MappingDialog dialog;
 	private static Map<String, String> value;
 	private String[] possibleClassValues;

@@ -9,6 +9,9 @@ import com.techsoft.partselector.util.SimpleLogger;
 import com.techsoft.partselector.util.knowledgebase.PartLibrary;
 import com.techsoft.partselector.util.reflect.ClassReader;
 
+/** Removes classes which represents type of the parts.
+ * 
+ * @author Andrii Dzhyrma */
 public class FileRemover {
 	private final static Logger LOGGER = SimpleLogger.getLogger(FileRemover.class);
 
@@ -24,6 +27,11 @@ public class FileRemover {
 		return !javaFile.exists() && !classFile.delete();
 	}
 
+	/** Removes class from the runtime and files of the given class on hard
+	 * drive.
+	 * 
+	 * @param className - name of the class to be removed.
+	 * @return true, if everything was deleted successfully. */
 	public static boolean removeClass(String className) {
 		Class<?> clazz = null;
 		try {

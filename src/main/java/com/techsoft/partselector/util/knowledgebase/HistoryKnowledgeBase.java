@@ -17,11 +17,16 @@ import com.techsoft.partselector.util.SimpleLogger;
 import com.techsoft.partselector.util.comparator.RankComparator;
 import com.techsoft.partselector.util.io.ReflectObjectInputStream;
 
+/** Class to manipulate knowledge base in the project.
+ * 
+ * @author Andrii Dzhyrma */
 public class HistoryKnowledgeBase implements Serializable {
 
 	private static final long serialVersionUID = -1595392856230418960L;
 	private static final Logger LOGGER = SimpleLogger.getLogger(HistoryKnowledgeBase.class);
 
+	/** @uml.property name="instance"
+	 * @uml.associationEnd */
 	private static volatile HistoryKnowledgeBase instance;
 
 	private Map<HashVector, Integer> frequency;
@@ -42,6 +47,10 @@ public class HistoryKnowledgeBase implements Serializable {
 		}
 	}
 
+	/** Get an instance of the current class.
+	 * 
+	 * @return the current instance
+	 * @uml.property name="instance" */
 	public synchronized static HistoryKnowledgeBase getInstance() {
 		if (instance == null) {
 			try {
@@ -60,6 +69,9 @@ public class HistoryKnowledgeBase implements Serializable {
 		return instance;
 	}
 
+	/** Updates the frequencies of the combinations in the knowledge base.
+	 * 
+	 * @param newData - new frequencies. */
 	public void update(Map<HashVector, Integer> newData) {
 		if (newData == null)
 			return;
@@ -71,16 +83,20 @@ public class HistoryKnowledgeBase implements Serializable {
 		saveLibrary();
 	}
 
+	/** @return comparator for the combinations based on the current knowledge
+	 *         base. */
 	public RankComparator<HashVector> getRankComparator() {
 		return new RankComparator<HashVector>(this.frequency);
 	}
-	
+
+	/** @return map with the combinations as keys and frequencies as values. */
 	public Map<HashVector, Integer> getFrequencyMap() {
 		return new HashMap<HashVector, Integer>(this.frequency);
 	}
 
+	/** Clears the knowledge base. */
 	public void clear() {
 		this.frequency = new HashMap<HashVector, Integer>();
 		saveLibrary();
-    }
+	}
 }

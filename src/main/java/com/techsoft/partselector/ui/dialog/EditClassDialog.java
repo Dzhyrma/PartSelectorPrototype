@@ -29,6 +29,9 @@ import com.techsoft.partselector.ui.util.ImageUtility;
 import com.techsoft.partselector.util.reflect.ClassGenerator;
 import com.techsoft.partselector.util.reflect.ClassReader;
 
+/**
+ * @author  Andrii Dzhyrma 
+ */
 public class EditClassDialog extends JDialog implements ActionListener {
 
 	private class ButtonCellEditor extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, ActionListener {
@@ -133,6 +136,10 @@ public class EditClassDialog extends JDialog implements ActionListener {
 		}
 	}
 
+	/**
+     * @uml.property  name="dialog"
+     * @uml.associationEnd  
+     */
 	private static EditClassDialog dialog;
 	private static final long serialVersionUID = 5168445697218784619L;
 
@@ -150,10 +157,20 @@ public class EditClassDialog extends JDialog implements ActionListener {
 		dialog.setVisible(true);
 	}*/
 
-	private JButton acceptButton, cancelButton, addFieldButton;
+	private JButton acceptButton;
+	private JButton cancelButton;
+	private JButton addFieldButton;
 	private JComboBox<Class<? extends Part>> classExtendsComboBox;
+	/**
+     * @uml.property  name="classGenerator"
+     * @uml.associationEnd  
+     */
 	private ClassGenerator classGenerator;
 	private JTextField classNameTextField;
+	/**
+     * @uml.property  name="fieldsData"
+     * @uml.associationEnd  
+     */
 	private MyTableModel fieldsData;
 	private JTable fieldsTable;
 

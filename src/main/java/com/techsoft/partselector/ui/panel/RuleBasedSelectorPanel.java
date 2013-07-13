@@ -52,6 +52,10 @@ import com.techsoft.partselector.util.rules.RuleLibrary;
 import com.techsoft.partselector.util.rules.RuleModel;
 import com.techsoft.partselector.util.rules.RuleResult;
 
+/**
+ * @author          Andrii Dzhyrma
+ * @uml.dependency   supplier="com.techsoft.partselector.ui.frame.ResultFrame"
+ */
 public class RuleBasedSelectorPanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = -6436312302252686831L;
@@ -61,6 +65,10 @@ public class RuleBasedSelectorPanel extends JPanel implements ActionListener {
 	private JButton fireRuleButton;
 	private JTable parametersTable;
 	private JList<String> classList;
+	/**
+     * @uml.property  name="parametersData"
+     * @uml.associationEnd  
+     */
 	private MyTableModel parametersData;
 	private KnowledgeBase knowledgeBase;
 
@@ -227,9 +235,15 @@ public class RuleBasedSelectorPanel extends JPanel implements ActionListener {
 			return "";
 	}
 
+	/**
+     * @author  Andrii Dzhyrma 
+     */
 	class MyTableModel extends AbstractTableModel {
 		private static final long serialVersionUID = -338367598597265732L;
 		private String[] columnNames = { "Name", "Value" };
+		/**
+         * @uml.property  name="data"
+         */
 		private Object[][] data = new Object[0][2];
 
 		public int getColumnCount() {
@@ -271,25 +285,33 @@ public class RuleBasedSelectorPanel extends JPanel implements ActionListener {
 			super.fireTableCellUpdated(row, col);
 		}
 
+		/**
+         * @param newData
+         * @uml.property  name="data"
+         */
 		public void setData(Object[][] newData) {
-			if (newData != null && newData.length > 0 && newData[0].length == 2)
-				this.data = newData;
-			else
-				this.data = new Object[0][2];
-			super.fireTableDataChanged();
-		}
+        	if (newData != null && newData.length > 0 && newData[0].length == 2)
+        		this.data = newData;
+        	else
+        		this.data = new Object[0][2];
+        	super.fireTableDataChanged();
+        }
 
+		/**
+         * @return
+         * @uml.property  name="data"
+         */
 		public Map<String, Object> getData() {
-			Map<String, Object> result = new HashMap<String, Object>();
-			if (this.data == null)
-				return result;
-			for (int i = 0; i < this.data.length; i++) {
-				if (this.data[i] == null || this.data[i].length != 2)
-					continue;
-				result.put(this.data[i][0].toString(), this.data[i][1] == null ? 0 : (Number) this.data[i][1]);
-			}
-			return result;
-		}
+        	Map<String, Object> result = new HashMap<String, Object>();
+        	if (this.data == null)
+        		return result;
+        	for (int i = 0; i < this.data.length; i++) {
+        		if (this.data[i] == null || this.data[i].length != 2)
+        			continue;
+        		result.put(this.data[i][0].toString(), this.data[i][1] == null ? 0 : (Number) this.data[i][1]);
+        	}
+        	return result;
+        }
 	}
 
 }

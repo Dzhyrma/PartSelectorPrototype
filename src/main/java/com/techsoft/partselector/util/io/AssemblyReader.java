@@ -16,8 +16,13 @@ import org.xml.sax.SAXException;
 import com.techsoft.partselector.model.*;
 import com.techsoft.partselector.util.knowledgebase.PartLibrary;
 
+/** Reader for assemblies. Has only static methods to read the assembly objects
+ * from files.
+ * 
+ * @author Andrii Dzhyrma */
 public class AssemblyReader {
 
+	// String constants
 	private static final String ASSEMBLY_STRING = "Assembly";
 	private static final String ASSEMBLY_NODE_STRING = "Part";
 	private static final String REFERENCE_STRING = "refPt";
@@ -32,6 +37,7 @@ public class AssemblyReader {
 	private static Vector<AssemblyNode> readAssemblyNode(Element node) {
 		if (node == null)
 			return null;
+		// checks for the assembly nodes with parts information inside.
 		Vector<AssemblyNode> result = new Vector<AssemblyNode>();
 		Part part = PartLibrary.getInstance().getPart(node.getAttribute(NAME_STRING));
 		if (part == null)
@@ -43,7 +49,9 @@ public class AssemblyReader {
 				continue;
 			if (childNode.getNodeName().compareToIgnoreCase(REFERENCE_STRING) == 0 && childNode.hasAttribute(X_STRING) && childNode.hasAttribute(Y_STRING)
 			                && childNode.hasAttribute(Z_STRING)) {
-				Reference ref = new Reference(Double.valueOf(childNode.getAttribute(X_STRING)), Double.valueOf(childNode.getAttribute(Y_STRING)), Double.valueOf(childNode.getAttribute(Z_STRING)));
+				Reference ref =
+				    new Reference(Double.valueOf(childNode.getAttribute(X_STRING)), Double.valueOf(childNode.getAttribute(Y_STRING)), Double.valueOf(childNode
+				                    .getAttribute(Z_STRING)));
 				result.add(new AssemblyNode(part, ref));
 			}
 		}
@@ -53,6 +61,7 @@ public class AssemblyReader {
 	private static Assembly readAssembly(Element node) {
 		if (node == null || node.getNodeName().compareToIgnoreCase(ASSEMBLY_STRING) != 0)
 			return null;
+		// traverse the assembly recursively.
 		Assembly result = new Assembly(node.getAttribute(NAME_STRING));
 		NodeList nodeList = node.getChildNodes();
 		for (int i = 0; i < nodeList.getLength(); i++) {
@@ -74,6 +83,11 @@ public class AssemblyReader {
 		return result;
 	}
 
+	/** Returns an Assembly instance parsed from the file. For any exception
+	 * prints the error on the screen (should be changed to maintain the bugs).
+	 * 
+	 * @param file - file to be parsed.
+	 * @return assembly instance. */
 	public static Assembly readAssemblyFromXML(File file) {
 		if (!file.exists())
 			return null;
@@ -92,6 +106,10 @@ public class AssemblyReader {
 		return result;
 	}
 
+	/** Returns an Assembly instance parsed from the file.
+	 * 
+	 * @param fileName - name of the file to be parsed.
+	 * @return assembly instance. */
 	public static Assembly readAssemblyFromXML(String fileName) {
 		File file = new File(fileName);
 		return readAssemblyFromXML(file);

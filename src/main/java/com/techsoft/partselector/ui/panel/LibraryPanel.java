@@ -34,11 +34,23 @@ import com.techsoft.partselector.util.reflect.ClassCompiler;
 import com.techsoft.partselector.util.reflect.ClassGenerator;
 import com.techsoft.partselector.util.reflect.ClassReader;
 
+/**
+ * @uml.dependency   supplier="com.techsoft.partselector.ui.dialog.MappingDialog"
+ * @uml.dependency   supplier="com.techsoft.partselector.ui.dialog.EditClassDialog"
+ */
 public class LibraryPanel extends JPanel implements ActionListener, ListSelectionListener {
 
 	private static final long serialVersionUID = -3389243649999461716L;
 
-	private JButton addNewClassButton, addNewPartsButton, deleteClassButton, deletePartsButton, editClassButton;
+	private JButton addNewClassButton;
+
+	private JButton addNewPartsButton;
+
+	private JButton deleteClassButton;
+
+	private JButton deletePartsButton;
+
+	private JButton editClassButton;
 	private JFrame mainFrame;
 	private JList<String> classList;
 	private JList<Part> partList;

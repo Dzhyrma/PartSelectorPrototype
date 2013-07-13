@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1535,714" id="com.techsoft.partselector.model" metadata="uml2-1.0" initialized="true" zoom="1.5" scrolledY="231" tag="1000" key="32303037303533312D31303030205061727453656C6563746F7250726F746F747970652F416E64726969">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.5/@sourceConnections.1 //@children.5/@sourceConnections.0" name="HashVector" location="337,375" size="113,121" id="com.techsoft.partselector.model/HashVector" runTimeClassModel="hashCode(),equals(Ljava.lang.Object;),hashCode,addPart(Lcom.techsoft.partselector.model.Part;),toString()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="85,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="hashCode" id="com.techsoft.partselector.model/HashVector#hashCode"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="79,54">
+      <children xsi:type="editmodel:MethodEditModel" name="addPart" id="com.techsoft.partselector.model/HashVector#addPart(Lcom.techsoft.partselector.model.Part;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="com.techsoft.partselector.model/HashVector#equals(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hashCode" id="com.techsoft.partselector.model/HashVector#hashCode()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" id="com.techsoft.partselector.model/HashVector-Soyatec::Import->com.techsoft.partselector.model/Part*com.techsoft.partselector.model/HashVector-Standard::Call->com.techsoft.partselector.model/Part" source="//@children.0" target="//@children.4" targetEnd="//@children.0/@sourceConnections.0/@children.2" label="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="19,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="20,85"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.techsoft.partselector.model/Part@parts+com.techsoft.partselector.model/HashVector@hashVector" source="//@children.0" target="//@children.4" targetEnd="//@children.0/@sourceConnections.1/@children.1" label="//@children.0/@sourceConnections.1/@children.2" sourceEnd="//@children.0/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="hashVector" location="101,0" id="com.techsoft.partselector.model/Part@parts+com.techsoft.partselector.model/HashVector@hashVector|com.techsoft.partselector.model/HashVector#hashVector" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="parts" location="101,85" id="com.techsoft.partselector.model/Part@parts+com.techsoft.partselector.model/HashVector@hashVector|com.techsoft.partselector.model/Part#parts" multiplicityLabel="//@children.0/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.0/@sourceConnections.1/@children.1/@children.0" navigable="true" orderingKind="1">
+        <children xsi:type="editmodel:LabelEditModel" name=" - parts" location="445,307" size="35,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="427,307" size="4,14" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.1 //@children.2/@sourceConnections.0" name="AssemblyNode" location="337,60" size="135,67" id="com.techsoft.partselector.model/AssemblyNode" runTimeClassModel="AssemblyNode(Lcom.techsoft.partselector.model.Part;Lcom.techsoft.partselector.model.Reference;),toString()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="102,18">
+      <children xsi:type="editmodel:MethodEditModel" name="AssemblyNode" id="com.techsoft.partselector.model/AssemblyNode#AssemblyNode(Lcom.techsoft.partselector.model.Part;Lcom.techsoft.partselector.model.Reference;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="com.techsoft.partselector.model/Reference@ref+com.techsoft.partselector.model/AssemblyNode@" source="//@children.1" target="//@children.3" targetEnd="//@children.1/@sourceConnections.0/@children.2" label="//@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="135,33" id="com.techsoft.partselector.model/Reference@ref+com.techsoft.partselector.model/AssemblyNode@|com.techsoft.partselector.model/AssemblyNode#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ref" location="0,33" id="com.techsoft.partselector.model/Reference@ref+com.techsoft.partselector.model/AssemblyNode@|com.techsoft.partselector.model/Reference#ref" multiplicityLabel="//@children.1/@sourceConnections.0/@children.2/@children.1" roleLabel="//@children.1/@sourceConnections.0/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - ref" location="539,71" size="24,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="557,99" size="6,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" id="com.techsoft.partselector.model/AssemblyNode-Soyatec::Import->com.techsoft.partselector.model/Reference" source="//@children.1" target="//@children.3" targetEnd="//@children.1/@sourceConnections.1/@children.2" label="//@children.1/@sourceConnections.1/@children.0" sourceEnd="//@children.1/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="135,58" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,58"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" id="com.techsoft.partselector.model/AssemblyNode-Standard::Call->com.techsoft.partselector.model/Part*com.techsoft.partselector.model/AssemblyNode-Soyatec::Import->com.techsoft.partselector.model/Part" source="//@children.1" target="//@children.4" targetEnd="//@children.1/@sourceConnections.2/@children.2" label="//@children.1/@sourceConnections.2/@children.0" sourceEnd="//@children.1/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="20,67" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="19,0"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.techsoft.partselector.model/Part@part+com.techsoft.partselector.model/AssemblyNode@" source="//@children.1" target="//@children.4" targetEnd="//@children.1/@sourceConnections.3/@children.2" label="//@children.1/@sourceConnections.3/@children.0" sourceEnd="//@children.1/@sourceConnections.3/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="111,67" id="com.techsoft.partselector.model/Part@part+com.techsoft.partselector.model/AssemblyNode@|com.techsoft.partselector.model/AssemblyNode#" attachSource="true" roleLabel="//@children.1/@sourceConnections.3/@children.1/@children.0">
+        <children xsi:type="editmodel:LabelEditModel" location="441,133" size="0,14" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="part" location="111,0" id="com.techsoft.partselector.model/Part@part+com.techsoft.partselector.model/AssemblyNode@|com.techsoft.partselector.model/Part#part" multiplicityLabel="//@children.1/@sourceConnections.3/@children.2/@children.1" roleLabel="//@children.1/@sourceConnections.3/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - part" location="455,195" size="29,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="435,195" size="6,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.2" name="Assembly" location="120,60" size="124,139" id="com.techsoft.partselector.model/Assembly" runTimeClassModel="addNode(Lcom.techsoft.partselector.model.AssemblyNode;),getNodes(),getAssemblies(),Assembly(Ljava.lang.String;),addAssembly(Lcom.techsoft.partselector.model.Assembly;),toString()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="101,90">
+      <children xsi:type="editmodel:MethodEditModel" name="Assembly" id="com.techsoft.partselector.model/Assembly#Assembly(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addAssembly" id="com.techsoft.partselector.model/Assembly#addAssembly(Lcom.techsoft.partselector.model.Assembly;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addNode" id="com.techsoft.partselector.model/Assembly#addNode(Lcom.techsoft.partselector.model.AssemblyNode;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getAssemblies" id="com.techsoft.partselector.model/Assembly#getAssemblies()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getNodes" id="com.techsoft.partselector.model/Assembly#getNodes()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.techsoft.partselector.model/AssemblyNode@nodes+com.techsoft.partselector.model/Assembly@assembly" source="//@children.2" target="//@children.1" targetEnd="//@children.2/@sourceConnections.0/@children.1" label="//@children.2/@sourceConnections.0/@children.2" sourceEnd="//@children.2/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="assembly" location="124,60" id="com.techsoft.partselector.model/AssemblyNode@nodes+com.techsoft.partselector.model/Assembly@assembly|com.techsoft.partselector.model/Assembly#assembly" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="nodes" location="0,60" id="com.techsoft.partselector.model/AssemblyNode@nodes+com.techsoft.partselector.model/Assembly@assembly|com.techsoft.partselector.model/AssemblyNode#nodes" multiplicityLabel="//@children.2/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.2/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - nodes" location="289,99" size="40,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="325,127" size="4,14" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" id="com.techsoft.partselector.model/Assembly-Soyatec::Import->com.techsoft.partselector.model/AssemblyNode*com.techsoft.partselector.model/Assembly-Standard::Call->com.techsoft.partselector.model/AssemblyNode" source="//@children.2" target="//@children.1" targetEnd="//@children.2/@sourceConnections.1/@children.2" label="//@children.2/@sourceConnections.1/@children.0" sourceEnd="//@children.2/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="124,37" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,37"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.techsoft.partselector.model/Assembly@forks+com.techsoft.partselector.model/Assembly@assembly1" source="//@children.2" target="//@children.2" targetEnd="//@children.2/@sourceConnections.2/@children.1" label="//@children.2/@sourceConnections.2/@children.2" sourceEnd="//@children.2/@sourceConnections.2/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="forks" location="98,139" id="com.techsoft.partselector.model/Assembly@forks+com.techsoft.partselector.model/Assembly@assembly1|com.techsoft.partselector.model/Assembly#forks" anchorKind="FixedAtEdge" attachSource="true" multiplicityLabel="//@children.2/@sourceConnections.2/@children.0/@children.1" roleLabel="//@children.2/@sourceConnections.2/@children.0/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - forks" location="176,205" size="35,14" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="225,205" size="4,14" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="assembly1" location="124,118" id="com.techsoft.partselector.model/Assembly@forks+com.techsoft.partselector.model/Assembly@assembly1|com.techsoft.partselector.model/Assembly#assembly1" anchorKind="FixedAtEdge"/>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@sourceConnections.0 //@children.1/@sourceConnections.1" name="Reference" location="570,60" size="107,67" id="com.techsoft.partselector.model/Reference" runTimeClassModel="Reference(Ljava.lang.Double;Ljava.lang.Double;Ljava.lang.Double;),toString()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="81,18">
+      <children xsi:type="editmodel:MethodEditModel" name="Reference" id="com.techsoft.partselector.model/Reference#Reference(Ljava.lang.Double;Ljava.lang.Double;Ljava.lang.Double;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@sourceConnections.2 //@children.1/@sourceConnections.3 //@children.0/@sourceConnections.0 //@children.0/@sourceConnections.1" name="Part" location="337,216" size="135,85" id="com.techsoft.partselector.model/Part" runTimeClassModel="Part(Ljava.lang.String;),name,toString()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="79,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="name" location="3,32" id="com.techsoft.partselector.model/Part#name"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="49,18">
+      <children xsi:type="editmodel:MethodEditModel" name="Part" location="400,286" id="com.techsoft.partselector.model/Part#Part(Ljava.lang.String;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.5/@sourceConnections.2" name="RuleResult" location="529,209" size="189,117" id="com.techsoft.partselector.util.rules/RuleResult" runTimeClassModel="getInstance(),getResults(),addResult(Lcom.techsoft.partselector.model.HashVector;),clearResults()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="90,54">
+      <children xsi:type="editmodel:MethodEditModel" name="addResult" id="com.techsoft.partselector.util.rules/RuleResult#addResult(Lcom.techsoft.partselector.model.HashVector;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="clearResults" id="com.techsoft.partselector.util.rules/RuleResult#clearResults()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getResults" id="com.techsoft.partselector.util.rules/RuleResult#getResults()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" id="com.techsoft.partselector.util.rules/RuleResult-Soyatec::Import->com.techsoft.partselector.model/HashVector" source="//@children.5" target="//@children.0" targetEnd="//@children.5/@sourceConnections.0/@children.2" label="//@children.5/@sourceConnections.0/@children.0" sourceEnd="//@children.5/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="10,116" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="113,32"/>
+      <bendpoints secondRelativeDimension="89,1" firstRelativeDimension="0,81"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.techsoft.partselector.util.rules/RuleResult@ruleResult+com.techsoft.partselector.model/HashVector@results" source="//@children.5" target="//@children.0" targetEnd="//@children.5/@sourceConnections.1/@children.1" label="//@children.5/@sourceConnections.1/@children.2" sourceEnd="//@children.5/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ruleResult" location="78,116" id="com.techsoft.partselector.util.rules/RuleResult@ruleResult+com.techsoft.partselector.model/HashVector@results|com.techsoft.partselector.util.rules/RuleResult#ruleResult" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="results" location="113,60" id="com.techsoft.partselector.util.rules/RuleResult@ruleResult+com.techsoft.partselector.model/HashVector@results|com.techsoft.partselector.model/HashVector#results" multiplicityLabel="//@children.5/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.5/@sourceConnections.1/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - results" location="457,441" size="43,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="457,413" size="4,14" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" id="com.techsoft.partselector.util.rules/RuleResult@instance+com.techsoft.partselector.util.rules/RuleResult@" source="//@children.5" target="//@children.5" targetEnd="//@children.5/@sourceConnections.2/@children.2" label="//@children.5/@sourceConnections.2/@children.0" sourceEnd="//@children.5/@sourceConnections.2/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="instance" location="168,116" id="com.techsoft.partselector.util.rules/RuleResult@instance+com.techsoft.partselector.util.rules/RuleResult@|com.techsoft.partselector.util.rules/RuleResult#instance" anchorKind="FixedAtEdge" attachSource="true" multiplicityLabel="//@children.5/@sourceConnections.2/@children.1/@children.2" roleLabel="//@children.5/@sourceConnections.2/@children.1/@children.0" orderingLabel="//@children.5/@sourceConnections.2/@children.1/@children.1" scopeKind="1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - instance" location="638,333" size="51,14" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="{order}" location="703,333" size="34,14" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="671,347" size="18,14" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="189,96" id="com.techsoft.partselector.util.rules/RuleResult@instance+com.techsoft.partselector.util.rules/RuleResult@|com.techsoft.partselector.util.rules/RuleResult#" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=7;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>

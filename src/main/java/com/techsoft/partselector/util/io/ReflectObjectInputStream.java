@@ -7,6 +7,10 @@ import java.io.ObjectStreamClass;
 
 import com.techsoft.partselector.util.reflect.ClassReader;
 
+/** Class for resolving problems with creation of new classes with names
+ * previously existed.
+ * 
+ * @author Andrii Dzhyrma */
 public class ReflectObjectInputStream extends ObjectInputStream {
 
 	@Override

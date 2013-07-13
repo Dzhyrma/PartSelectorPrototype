@@ -8,7 +8,6 @@ import com.techsoft.partselector.util.reflect.ClassCompiler;
 import com.techsoft.partselector.util.reflect.ClassGenerator;
 import com.techsoft.partselector.util.reflect.ClassReader;
 import com.techsoft.partselector.util.rules.RuleLibrary;
-import com.techsoft.partselector.util.rules.RuleModel;
 
 //import com.techsoft.partselector.util.rules.RuleModel;
 
